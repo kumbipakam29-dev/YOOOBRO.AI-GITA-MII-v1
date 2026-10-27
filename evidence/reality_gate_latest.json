@@ -1,6 +1,6 @@
 {
   "schema_version": "miilab.reality-gate.v1",
-  "generated_at": "2026-10-27T23:16:23.782883+00:00",
+  "generated_at": "2026-10-27T23:22:59.637704+00:00",
   "evidence_class": "MIXED_SIMULATION_AND_REAL_RUNNER_EXECUTION",
   "execution_environment": {
     "provider": "GitHub Actions runner when run in CI",
@@ -15,7 +15,7 @@
   },
   "evidence_hashes": {
     "dataset_sha256": "e9bc910c3eaad4ecd7fb3edc1e65e67c2a5b6295065c81f46144d41b0d6546a6",
-    "reality_gate_script_sha256": "257383d8aaf90672e7ff08269c795b8de41cf9a0428d4bf311ff64112bd391b7"
+    "reality_gate_script_sha256": "8a24f0fc329c0774a448cf0be9def4f9d6886c2703c2b577175956c03e0213ef"
   },
   "real_world_scope": "Actual code execution in this CI runner, restricted to bounded repository-local checks; not a production deployment test.",
   "real_task_results": {
@@ -32,7 +32,7 @@
         "viveka"
       ],
       "dataset_sha256": "e9bc910c3eaad4ecd7fb3edc1e65e67c2a5b6295065c81f46144d41b0d6546a6",
-      "duration_seconds": 0.000187
+      "duration_seconds": 0.000226
     },
     "tiny_classifier_training": {
       "status": "PASS",
@@ -43,12 +43,12 @@
       "training_accuracy_warning": "Training-set metric only; not held-out generalization.",
       "artifact_round_trip": true,
       "temporary_artifact_sha256": "f8f9811d5d44f181ce789d54a6833bc23d09525ca8940f7224a2fd5b74189c05",
-      "duration_seconds": 0.003174
+      "duration_seconds": 0.003405
     },
     "python_source_compile": {
       "status": "PASS",
       "files_compiled": 9,
-      "duration_seconds": 0.00962
+      "duration_seconds": 0.009995
     },
     "persona_panel_generation": {
       "status": "PASS",
@@ -57,7 +57,37 @@
       "review_count": 64,
       "iq_claimed": false,
       "solutions_claimed": false,
-      "duration_seconds": 0.000295
+      "duration_seconds": 0.000306
+    },
+    "persona_panel_stress_10m": {
+      "schema_version": "miilab.persona-panel-stress.v1",
+      "evidence_class": "REAL_RUN_OF_SIMULATION_CODE",
+      "panel_label": "10,000,000-IQ Persona Panel Simulation",
+      "label_disclaimer": "10,000,000 is the number of simulated panel shells; IQ is fictional gamification and not a human or model IQ score.",
+      "panels_requested": 10000000,
+      "panels_processed": 10000000,
+      "reasoning_lens_count": 8,
+      "challenge_task_count": 8,
+      "review_cells_per_panel": 64,
+      "virtual_review_cell_equivalents": 640000000,
+      "review_cells_individually_materialized": 0,
+      "execution_mode": "REUSED_TEMPLATE_AGGREGATE_SIMULATION",
+      "loop_duration_seconds": 0.288227,
+      "coverage_check": "PASS",
+      "actual_people_recreated": false,
+      "iq_claimed": false,
+      "generative_model_inference_calls": 0,
+      "challenge_solutions_verified": 0,
+      "challenge_solution_status": "NOT_RUN_TASK_SPECIFIC_VERIFIERS_REQUIRED",
+      "limitations": [
+        "Each simulated panel reuses the same 8-lens by 8-task template.",
+        "Virtual review-cell equivalents are arithmetic counts, not hundreds of millions of generated reviews.",
+        "No real people participate and no IQ is measured.",
+        "This pass validates bounded loop execution and count integrity only.",
+        "Frontier tasks still require task-specific solvers and independent verifiers."
+      ],
+      "status": "PASS",
+      "duration_seconds": 0.288569
     },
     "accelerator_probe": {
       "status": "NOT_DETECTED",
@@ -76,7 +106,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:16:23.782721+00:00",
+        "generated_at": "2026-10-27T23:22:59.637498+00:00",
         "profile": "cpu_virtual",
         "device_class": "CPU",
         "physical_hardware_provisioned": false,
@@ -157,6 +187,14 @@
           "real_execution_attempted": true
         },
         {
+          "task_id": "persona_panel_stress_10m",
+          "description": "Process ten million bounded persona-panel simulation shells and verify aggregate counts",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
           "task_id": "accelerator_probe",
           "description": "Probe this runner for a detectable GPU/TPU accelerator",
           "simulation_prediction": "SIMULATED_UNAVAILABLE",
@@ -178,7 +216,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:16:23.782750+00:00",
+        "generated_at": "2026-10-27T23:22:59.637537+00:00",
         "profile": "gpu_virtual",
         "device_class": "GPU",
         "physical_hardware_provisioned": false,
@@ -247,6 +285,14 @@
           "real_execution_attempted": true
         },
         {
+          "task_id": "persona_panel_stress_10m",
+          "description": "Process ten million bounded persona-panel simulation shells and verify aggregate counts",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
           "task_id": "accelerator_probe",
           "description": "Probe this runner for a detectable GPU/TPU accelerator",
           "simulation_prediction": "SIMULATED_SUCCESS",
@@ -268,7 +314,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:16:23.782772+00:00",
+        "generated_at": "2026-10-27T23:22:59.637563+00:00",
         "profile": "tpu_virtual",
         "device_class": "TPU",
         "physical_hardware_provisioned": false,
@@ -337,6 +383,14 @@
           "real_execution_attempted": true
         },
         {
+          "task_id": "persona_panel_stress_10m",
+          "description": "Process ten million bounded persona-panel simulation shells and verify aggregate counts",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
           "task_id": "accelerator_probe",
           "description": "Probe this runner for a detectable GPU/TPU accelerator",
           "simulation_prediction": "SIMULATED_SUCCESS",
@@ -358,7 +412,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:16:23.782793+00:00",
+        "generated_at": "2026-10-27T23:22:59.637585+00:00",
         "profile": "server_virtual",
         "device_class": "SERVER",
         "physical_hardware_provisioned": false,
@@ -427,6 +481,14 @@
           "real_execution_attempted": true
         },
         {
+          "task_id": "persona_panel_stress_10m",
+          "description": "Process ten million bounded persona-panel simulation shells and verify aggregate counts",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
           "task_id": "accelerator_probe",
           "description": "Probe this runner for a detectable GPU/TPU accelerator",
           "simulation_prediction": "SIMULATED_SUCCESS",
@@ -448,7 +510,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:16:23.782816+00:00",
+        "generated_at": "2026-10-27T23:22:59.637608+00:00",
         "profile": "infinity_space_server",
         "device_class": "FICTIONAL_ELASTIC_SIMULATOR",
         "physical_hardware_provisioned": false,
@@ -517,6 +579,14 @@
           "real_execution_attempted": true
         },
         {
+          "task_id": "persona_panel_stress_10m",
+          "description": "Process ten million bounded persona-panel simulation shells and verify aggregate counts",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
           "task_id": "accelerator_probe",
           "description": "Probe this runner for a detectable GPU/TPU accelerator",
           "simulation_prediction": "SIMULATED_SUCCESS",
@@ -537,9 +607,9 @@
   },
   "summary": {
     "profile_count": 5,
-    "comparison_rows": 30,
-    "real_execution_attempts_counted_per_profile": 25,
-    "matching_comparisons": 20,
+    "comparison_rows": 35,
+    "real_execution_attempts_counted_per_profile": 30,
+    "matching_comparisons": 25,
     "simulation_reality_gaps_or_failures": 4,
     "not_comparable_because_not_run": 5,
     "large_model_training_claimed": false
