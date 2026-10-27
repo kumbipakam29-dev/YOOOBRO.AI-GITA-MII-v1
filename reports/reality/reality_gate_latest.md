@@ -1,12 +1,13 @@
 # Simulation-to-Reality Gate
 
-- Generated UTC: 2026-10-27T23:22:59.637704+00:00
+- Generated UTC: 2026-10-27T23:33:13.320245+00:00
 - Evidence class: MIXED_SIMULATION_AND_REAL_RUNNER_EXECUTION
 - Profiles compared: 5
 - Comparison rows: 35
 - Matching comparisons: 25
-- Simulation/reality gaps or failures: 4
-- Not comparable (task intentionally not run): 5
+- Simulation/reality gaps or guarded blocks: 5
+- Simulated-success tasks blocked by real resource guard: 1
+- Not comparable (task intentionally not run): 4
 
 ## Actual runner checks
 

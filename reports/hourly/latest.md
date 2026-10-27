@@ -1,13 +1,14 @@
 # MIi Hourly Status Snapshot
 
-- Generated UTC: 2026-10-27T23:22:59.707552+00:00
+- Generated UTC: 2026-10-27T23:33:13.367604+00:00
 - Repository: kumbipakam29-dev/YOOOBRO.AI-GITA-MII-v1
-- Source commit: 4712288681e008164a93692ecd04f689e1fcedeb
+- Source commit: 6e175572e049c3b924005d10de9736227326b45d
 - Regression tests: success
 - Simulation-to-reality gate: success
 - Comparison rows: 35
 - Matches: 25
-- Simulation/reality gaps or failures: 4
+- Simulation/reality gaps including resource-guard blocks: 5
+- Simulated-success tasks blocked by the real runner: 1
 - Large-model fine-tuning claimed: False
 
 ## Actual runner task statuses
