@@ -229,7 +229,11 @@ def run_real_tasks(root):
     return results
 
 def classify_comparison(simulated_expected, actual_status):
+    # Preserve the important false-positive case: the virtual infinity profile
+    # predicts that large fine-tuning is feasible, but real execution is blocked.
     if actual_status == "NOT_ATTEMPTED_RESOURCE_GUARD":
+        if simulated_expected == "SIMULATED_SUCCESS":
+            return "SIMULATED_SUCCESS_REAL_BLOCKED_GUARD"
         return "NOT_COMPARABLE_NOT_RUN"
     if actual_status == "NOT_DETECTED":
         if simulated_expected == "SIMULATED_SUCCESS":
@@ -265,7 +269,16 @@ def build_report(root, real_results):
     all_comparisons = [item for profile in profiles.values() for item in profile["task_comparisons"]]
     executed = sum(item["real_execution_attempted"] for item in all_comparisons)
     matches = sum(item["comparison"] in ("MATCH_TASK_EXECUTED", "RESOURCE_SIGNAL_MATCH") for item in all_comparisons)
-    gaps = sum("GAP" in item["comparison"] or item["comparison"] == "DIVERGENCE_OR_FAILURE" for item in all_comparisons)
+    gaps = sum(
+        "GAP" in item["comparison"]
+        or item["comparison"] == "DIVERGENCE_OR_FAILURE"
+        or item["comparison"] == "SIMULATED_SUCCESS_REAL_BLOCKED_GUARD"
+        for item in all_comparisons
+    )
+    blocked_after_sim_success = sum(
+        item["comparison"] == "SIMULATED_SUCCESS_REAL_BLOCKED_GUARD"
+        for item in all_comparisons
+    )
     not_comp = sum(item["comparison"] == "NOT_COMPARABLE_NOT_RUN" for item in all_comparisons)
     data_path = root / "datasets" / "principle_intents.jsonl"
     script_path = root / "src" / "miilab" / "reality_gate.py"
@@ -292,7 +305,8 @@ def build_report(root, real_results):
             "comparison_rows": len(all_comparisons),
             "real_execution_attempts_counted_per_profile": executed,
             "matching_comparisons": matches,
-            "simulation_reality_gaps_or_failures": gaps,
+            "simulation_reality_gaps_or_failures_including_guard_blocks": gaps,
+            "simulated_success_blocked_in_real_runner": blocked_after_sim_success,
             "not_comparable_because_not_run": not_comp,
             "large_model_training_claimed": False,
         },
@@ -314,7 +328,8 @@ def render_markdown(report):
         f"- Profiles compared: {summary['profile_count']}",
         f"- Comparison rows: {summary['comparison_rows']}",
         f"- Matching comparisons: {summary['matching_comparisons']}",
-        f"- Simulation/reality gaps or failures: {summary['simulation_reality_gaps_or_failures']}",
+        f"- Simulation/reality gaps or guarded blocks: {summary['simulation_reality_gaps_or_failures_including_guard_blocks']}",
+        f"- Simulated-success tasks blocked by real resource guard: {summary['simulated_success_blocked_in_real_runner']}",
         f"- Not comparable (task intentionally not run): {summary['not_comparable_because_not_run']}",
         "", "## Actual runner checks", "",
         "| Task | Actual status | Evidence |",
