@@ -92,20 +92,30 @@ def main() -> None:
     parser.add_argument("--personas", type=Path, default=Path("registry/personas.json"))
     parser.add_argument("--tasks", type=Path, default=Path("experiments/challenge_tasks.jsonl"))
     parser.add_argument("--output", type=Path, default=None)
+    parser.add_argument("--stress-panels", type=int, default=0,
+                        help="Process 1..10000000 logical panel shells without materializing review rows")
     args = parser.parse_args()
     panel = build_panel(args.personas, args.tasks)
-    payload = json.dumps(panel, ensure_ascii=False, indent=2) + "\n"
+    output_doc: dict[str, Any] = {"base_panel": panel}
+    if args.stress_panels:
+        output_doc["scaled_stress"] = run_scaled_panel_stress(
+            args.stress_panels, args.personas, args.tasks
+        )
+    payload = json.dumps(output_doc, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(payload, encoding="utf-8")
-    print(json.dumps({
+    summary = {
         "panel_label": panel["panel_label"],
         "persona_count": panel["persona_count"],
         "challenge_task_count": panel["challenge_task_count"],
         "review_count": panel["review_count"],
         "iq_claimed": panel["iq_claimed"],
         "solutions_claimed": panel["solutions_claimed"],
-    }, ensure_ascii=False, indent=2))
+    }
+    if args.stress_panels:
+        summary["scaled_stress"] = output_doc["scaled_stress"]
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

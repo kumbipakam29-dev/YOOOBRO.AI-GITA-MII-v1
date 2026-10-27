@@ -11,6 +11,12 @@ class RealityGateTests(unittest.TestCase):
         for task_id in ("dataset_validation", "tiny_classifier_training", "python_source_compile", "persona_panel_generation"):
             self.assertEqual(set(SIMULATED_TASKS[task_id]["simulated_success_profiles"]), set(PROFILE_NAMES))
 
+    def test_ten_million_panel_stress_is_in_reality_gate(self):
+        self.assertEqual(
+            set(SIMULATED_TASKS["persona_panel_stress_10m"]["simulated_success_profiles"]),
+            set(PROFILE_NAMES)
+        )
+
     def test_simulation_pass_requires_actual_pass(self):
         self.assertEqual(classify_comparison("SIMULATED_SUCCESS", "PASS"), "MATCH_TASK_EXECUTED")
 

@@ -30,3 +30,7 @@ Large foundation-model fine-tuning is labelled NOT_ATTEMPTED_RESOURCE_GUARD, not
 ## Run locally
 Set PYTHONPATH to src, then run: python -m unittest discover -s tests -v
 Then run: python -m miilab.reality_gate
+
+
+## 10M persona panel stress validation
+The Reality Gate runs a bounded 10,000,000-panel simulation counter on the actual GitHub runner. It verifies that 10,000,000 panel shells are processed and that their template implies 640,000,000 virtual review-cell equivalents. Only the panel-shell loop executes; all repeated lens/task cells reuse the same immutable template. No large model inference is performed, no human IQ is measured, and no frontier challenge is marked solved by this counter.

@@ -18,7 +18,7 @@ from pathlib import Path
 
 from miilab.trainer import predict, read_rows, train
 from miilab.simulation import PROFILES, simulate
-from miilab.persona_panel import build_panel
+from miilab.persona_panel import build_panel, run_scaled_panel_stress
 
 PROFILE_NAMES = list(PROFILES)
 
@@ -41,6 +41,11 @@ SIMULATED_TASKS = {
     },
     "persona_panel_generation": {
         "description": "Generate the public-work-inspired reasoning lens checklist panel",
+        "simulated_success_profiles": PROFILE_NAMES,
+        "real_runner_safe": True,
+    },
+    "persona_panel_stress_10m": {
+        "description": "Process ten million bounded persona-panel simulation shells and verify aggregate counts",
         "simulated_success_profiles": PROFILE_NAMES,
         "real_runner_safe": True,
     },
@@ -153,6 +158,35 @@ def run_real_tasks(root):
             results["persona_panel_generation"]["error"] = "Panel schema or truthfulness guard failed"
     except Exception as exc:
         results["persona_panel_generation"] = {
+            "status": "FAIL", "error_type": type(exc).__name__,
+            "error": str(exc), "duration_seconds": round(time.perf_counter() - started, 6),
+        }
+
+    started = time.perf_counter()
+    try:
+        stress = run_scaled_panel_stress(
+            10_000_000,
+            root / "registry" / "personas.json",
+            root / "experiments" / "challenge_tasks.jsonl",
+        )
+        valid = (
+            stress["coverage_check"] == "PASS"
+            and stress["panels_processed"] == 10_000_000
+            and stress["virtual_review_cell_equivalents"] == 640_000_000
+            and stress["review_cells_individually_materialized"] == 0
+            and not stress["iq_claimed"]
+            and stress["generative_model_inference_calls"] == 0
+            and stress["challenge_solutions_verified"] == 0
+        )
+        results["persona_panel_stress_10m"] = {
+            **stress,
+            "status": "PASS" if valid else "FAIL",
+            "duration_seconds": round(time.perf_counter() - started, 6),
+        }
+        if not valid:
+            results["persona_panel_stress_10m"]["error"] = "Ten-million-panel count or integrity assertion failed"
+    except Exception as exc:
+        results["persona_panel_stress_10m"] = {
             "status": "FAIL", "error_type": type(exc).__name__,
             "error": str(exc), "duration_seconds": round(time.perf_counter() - started, 6),
         }
@@ -313,7 +347,7 @@ def main():
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     markdown.write_text(render_markdown(report), encoding="utf-8")
     print(json.dumps(report["summary"], indent=2))
-    return 0 if all(results[key]["status"] == "PASS" for key in ("dataset_validation", "tiny_classifier_training", "python_source_compile", "persona_panel_generation")) else 1
+    return 0 if all(results[key]["status"] == "PASS" for key in ("dataset_validation", "tiny_classifier_training", "python_source_compile", "persona_panel_generation", "persona_panel_stress_10m")) else 1
 
 if __name__ == "__main__":
     raise SystemExit(main())

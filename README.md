@@ -74,3 +74,7 @@ The GitHub Actions hourly workflow is enabled and scheduled for minute 17 each h
 
 ## License
 See [LICENSE](LICENSE). Verify the license of every external model and dataset separately.
+
+
+## 10,000,000-IQ panel simulation
+The simulation workflow defaults to 10,000,000 logical panel shells. Each uses the same 8 public-work-inspired reasoning lenses and 8 challenge-task templates, giving 640,000,000 virtual review-cell equivalents. The workflow reuses the template and counts the logical matrix; it does not construct 640 million separate reviews, call a generative model 640 million times, reproduce the named people, measure IQ, or solve the challenge tasks. The Reality Gate independently executes this bounded counter on a real GitHub runner and verifies the totals.

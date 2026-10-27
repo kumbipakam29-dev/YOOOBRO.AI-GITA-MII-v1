@@ -26,6 +26,21 @@ class PersonaPanelTests(unittest.TestCase):
         self.assertFalse(self.panel["solutions_claimed"])
         self.assertTrue(all(row["status"] == "PERSPECTIVE_SIMULATION_NOT_SOLVED" for row in self.panel["perspective_reviews"]))
 
+    def test_scaled_panel_stress_aggregates_counts_without_faking_iq(self):
+        from miilab.persona_panel import run_scaled_panel_stress
+        result = run_scaled_panel_stress(panel_count=100)
+        self.assertEqual(result["panels_processed"], 100)
+        self.assertEqual(result["virtual_review_cell_equivalents"], 6_400)
+        self.assertEqual(result["coverage_check"], "PASS")
+        self.assertEqual(result["review_cells_individually_materialized"], 0)
+        self.assertFalse(result["iq_claimed"])
+        self.assertEqual(result["generative_model_inference_calls"], 0)
+
+    def test_scaled_panel_stress_caps_workload(self):
+        from miilab.persona_panel import run_scaled_panel_stress
+        with self.assertRaises(ValueError):
+            run_scaled_panel_stress(panel_count=10_000_001)
+
     def test_known_public_person_lenses_are_present(self):
         people = {row["public_person_reference"] for row in self.panel["perspective_reviews"]}
         self.assertIn("Albert Einstein", people)

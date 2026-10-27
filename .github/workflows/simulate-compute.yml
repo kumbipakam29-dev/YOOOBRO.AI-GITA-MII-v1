@@ -13,6 +13,10 @@ on:
         description: 'Logical jobs (1-10000000); fast mode estimates above 4096'
         required: true
         default: '1000000'
+      panels:
+        description: 'Number of simulated panel shells (1-10000000)'
+        required: true
+        default: '10000000'
       mode:
         description: 'Fast sampled estimate or bounded exact run'
         required: true
@@ -52,10 +56,11 @@ jobs:
           JOB_COUNT: ${{ inputs.jobs || '1000000' }}
           SIM_MODE: ${{ inputs.mode || 'fast' }}
         run: python -m miilab.simulation --profile all --jobs "$JOB_COUNT" --mode "$SIM_MODE" --max-ticks 1000000000 --output /tmp/virtual-compute-simulation.json
-      - name: Run 1,000,000-IQ public-work-inspired persona panel
+      - name: Run scaled persona panel simulation
         env:
           PYTHONPATH: src
-        run: python -m miilab.persona_panel --output /tmp/persona-panel-simulation.json
+          PANEL_COUNT: ${{ github.event.inputs.panels || '10000000' }}
+        run: python -m miilab.persona_panel --stress-panels "$PANEL_COUNT" --output /tmp/persona-panel-simulation.json
       - uses: actions/upload-artifact@v4
         with:
           name: virtual-compute-and-persona-simulation-not-hardware
