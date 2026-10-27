@@ -1,0 +1,9 @@
+{
+  "schema_version": "miilab.hourly-report.v1",
+  "report_type": "INITIAL_REPOSITORY_BOOTSTRAP",
+  "actual_frontier_model_training": false,
+  "tiny_cpu_baseline": "WORKFLOW_AVAILABLE_NOT_YET_RUN_IN_THIS_REPOSITORY",
+  "virtual_compute": "SIMULATION_ONLY",
+  "hourly_workflow": "CONFIGURED_FIRST_RUN_UNVERIFIED",
+  "frontier_challenges_solved": []
+}
