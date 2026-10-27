@@ -1,0 +1,34 @@
+name: MIi Research CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate Python modules
+        env:
+          PYTHONPATH: src
+        run: python -m compileall -q src
+      - name: Validate JSONL dataset
+        run: python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[json.loads(line) for line in Path('datasets/principle_intents.jsonl').read_text(encoding='utf-8').splitlines() if line.strip()]
+          assert rows and all(r.get('text') and r.get('label') for r in rows)
+          print(f'Validated {len(rows)} examples.')
+          PY
+      - name: Train tiny CPU baseline and simulate virtual profiles
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m miilab.trainer --data datasets/principle_intents.jsonl --output /tmp/model.json --metrics /tmp/metrics.json
+          python -m miilab.simulation --profile all --jobs 12 --output /tmp/simulation.json
