@@ -1,0 +1,28 @@
+{"text":"Check the source and tell me what is known and uncertain","label":"viveka"}
+{"text":"Separate evidence from guesses before answering","label":"viveka"}
+{"text":"Verify the claim independently and report confidence","label":"viveka"}
+{"text":"If evidence is missing say you do not know","label":"viveka"}
+{"text":"Plan the steps and complete the approved task","label":"karmayoga"}
+{"text":"Use the allowed tool and respect the permission gate","label":"karmayoga"}
+{"text":"Break work into actions and check the outcome","label":"karmayoga"}
+{"text":"Act carefully without inventing a success result","label":"karmayoga"}
+{"text":"Explain this Sanskrit verse with a reliable source","label":"jnanayoga"}
+{"text":"Retrieve facts and give a grounded explanation","label":"jnanayoga"}
+{"text":"Teach the concept in Hindi with an example","label":"jnanayoga"}
+{"text":"Compare the translation with the source text","label":"jnanayoga"}
+{"text":"Repeat the experiment with the same seed","label":"abhyasayoga"}
+{"text":"Save the checkpoint and rerun the regression tests","label":"abhyasayoga"}
+{"text":"Practice with measurable steps and track improvement","label":"abhyasayoga"}
+{"text":"Reproduce the previous result before changing parameters","label":"abhyasayoga"}
+{"text":"Test whether the answer stays stable when wording changes","label":"samatva"}
+{"text":"Check for bias and adversarial failures","label":"samatva"}
+{"text":"Compare both success and failure cases fairly","label":"samatva"}
+{"text":"Measure robustness instead of optimizing one score","label":"samatva"}
+{"text":"Respond respectfully and help without shaming","label":"maitri"}
+{"text":"Give supportive guidance and respect personal boundaries","label":"maitri"}
+{"text":"Be kind but do not pretend to diagnose me","label":"maitri"}
+{"text":"Use compassionate language and suggest safe next steps","label":"maitri"}
+{"text":"Tell me honestly that the test failed","label":"abhayasatya"}
+{"text":"Show the evidence and state the limitations clearly","label":"abhayasatya"}
+{"text":"Do not claim that a simulation is a real training run","label":"abhayasatya"}
+{"text":"Report security risks and uncertainty without hiding them","label":"abhayasatya"}
