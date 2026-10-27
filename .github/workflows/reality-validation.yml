@@ -6,6 +6,9 @@ on:
       - 'src/miilab/**'
       - 'tests/**'
       - 'datasets/**'
+      - 'experiments/miilab_hard_tasks_v1.jsonl'
+      - 'experiments/evaluation_policy.yaml'
+      - 'docs/FRONTIER_MODEL_STRATEGY.md'
       - '.github/workflows/reality-validation.yml'
 permissions:
   contents: read
