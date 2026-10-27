@@ -1,0 +1,36 @@
+schema_version: miilab.shloka-registry.v1
+source_policy: Keep original Sanskrit, translation, commentary, and engineering interpretation separate.
+primary_sources:
+  - name: IIT Kanpur Gita Supersite
+    url: https://www.gitasupersite.iitk.ac.in/
+  - name: SanskritDocuments Bhagavad Gita
+    url: https://sanskritdocuments.org/sanskrit/bhagavadgita/
+verses:
+  - id: BG-2.16
+    theme: discernment_about_real_and_transient
+    proposed_generation: MIi-Viveka
+    verification_status: SOURCE_REFERENCE_PENDING_PER_VERSE_REVIEW
+  - id: BG-2.47
+    theme: duty_and_action
+    proposed_generation: MIi-KarmaYoga
+    verification_status: SOURCE_REFERENCE_PENDING_PER_VERSE_REVIEW
+  - id: BG-2.48
+    theme: equanimity_in_action
+    proposed_generation: MIi-Viveka
+    verification_status: SOURCE_REFERENCE_PENDING_PER_VERSE_REVIEW
+  - id: BG-4.38
+    theme: knowledge_and_understanding
+    proposed_generation: MIi-JnanaYoga
+    verification_status: SOURCE_REFERENCE_PENDING_PER_VERSE_REVIEW
+  - id: BG-6.35
+    theme: practice_and_detachment
+    proposed_generation: MIi-AbhyasaYoga
+    verification_status: SOURCE_REFERENCE_PENDING_PER_VERSE_REVIEW
+  - id: BG-12.13
+    theme: friendliness_and_compassion
+    proposed_generation: MIi-Maitri
+    verification_status: SOURCE_REFERENCE_PENDING_PER_VERSE_REVIEW
+  - id: BG-16.1
+    theme: fearlessness_and_truthfulness
+    proposed_generation: MIi-AbhayaSatya
+    verification_status: SOURCE_REFERENCE_PENDING_PER_VERSE_REVIEW
