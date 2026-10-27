@@ -3,6 +3,12 @@ on:
   schedule:
     - cron: '17 * * * *'
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/hourly-report.yml'
+      - 'src/miilab/**'
+      - 'tests/**'
+      - 'datasets/**'
 permissions:
   actions: read
   contents: write
