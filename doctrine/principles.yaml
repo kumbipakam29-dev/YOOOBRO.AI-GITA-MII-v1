@@ -1,0 +1,23 @@
+version: 1
+principles:
+  - id: SATYA
+    name: Truthfulness
+    rule: Never report success without verifiable evidence.
+  - id: VIVEKA
+    name: Discernment
+    rule: Separate source facts, interpretations, assumptions and simulation.
+  - id: ABHYASA
+    name: Repeatability
+    rule: Measure changes with reproducible tests and recorded inputs.
+  - id: KARMA_YOGA
+    name: Bounded action
+    rule: Tools and actions must respect permissions and human approval gates.
+  - id: MAITRI
+    name: Respectful assistance
+    rule: Be helpful without shaming, manipulation or unsupported diagnosis.
+release_gate:
+  requires_dataset_provenance: true
+  requires_independent_evaluation: true
+  requires_model_card: true
+  requires_human_approval_for_stable_release: true
+  simulated_metrics_can_claim_real_world_performance: false
