@@ -1,9 +1,33 @@
 {
-  "schema_version": "miilab.hourly-report.v1",
-  "report_type": "INITIAL_REPOSITORY_BOOTSTRAP",
-  "actual_frontier_model_training": false,
-  "tiny_cpu_baseline": "WORKFLOW_AVAILABLE_NOT_YET_RUN_IN_THIS_REPOSITORY",
-  "virtual_compute": "SIMULATION_ONLY",
-  "hourly_workflow": "CONFIGURED_FIRST_RUN_UNVERIFIED",
-  "frontier_challenges_solved": []
+  "schema_version": "miilab.hourly-report.v2",
+  "generated_at": "2026-10-27T23:03:39.703493+00:00",
+  "repository": "kumbipakam29-dev/YOOOBRO.AI-GITA-MII-v1",
+  "commit_sha": "abebcdf356155e3a845dd04f49ac15eed05b59d0",
+  "workflow_run_id": "40599406318",
+  "report_type": "BEST_EFFORT_HOURLY_STATUS_AND_REALITY_GATE",
+  "test_step_outcome": "success",
+  "reality_gate_step_outcome": "success",
+  "reality_gate_summary": {
+    "profile_count": 5,
+    "comparison_rows": 25,
+    "real_execution_attempts_counted_per_profile": 20,
+    "matching_comparisons": 15,
+    "simulation_reality_gaps_or_failures": 4,
+    "not_comparable_because_not_run": 5,
+    "large_model_training_claimed": false
+  },
+  "actual_runner_task_statuses": {
+    "dataset_validation": "PASS",
+    "tiny_classifier_training": "PASS",
+    "python_source_compile": "PASS",
+    "accelerator_probe": "NOT_DETECTED",
+    "large_llm_finetune": "NOT_ATTEMPTED_RESOURCE_GUARD"
+  },
+  "model_training_claim": "No large foundation model is trained by this status workflow.",
+  "virtual_compute": "SIMULATION_ONLY; the runner capability probe is separate evidence.",
+  "pending": [
+    "Frontier tasks require separate authorized benchmark runs",
+    "No MIi generative LLM weights are claimed by this workflow",
+    "Device and production capability still require separate tests"
+  ]
 }

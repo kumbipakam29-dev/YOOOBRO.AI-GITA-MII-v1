@@ -1,0 +1,403 @@
+{
+  "schema_version": "miilab.reality-gate.v1",
+  "generated_at": "2026-10-27T23:03:39.644141+00:00",
+  "evidence_class": "MIXED_SIMULATION_AND_REAL_RUNNER_EXECUTION",
+  "execution_environment": {
+    "provider": "GitHub Actions runner when run in CI",
+    "python_version": "3.11.17",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "hardware_class": "hosted runner; accelerator capability independently probed",
+    "not_equivalent_to": [
+      "founder Android device",
+      "production server",
+      "external customer system"
+    ]
+  },
+  "evidence_hashes": {
+    "dataset_sha256": "e9bc910c3eaad4ecd7fb3edc1e65e67c2a5b6295065c81f46144d41b0d6546a6",
+    "reality_gate_script_sha256": "3fc5166630afa09e2a86f5277fed7ce429b20dc95b19409f554d34996645952a"
+  },
+  "real_world_scope": "Actual code execution in this CI runner, restricted to bounded repository-local checks; not a production deployment test.",
+  "real_task_results": {
+    "dataset_validation": {
+      "status": "PASS",
+      "rows": 28,
+      "labels": [
+        "abhayasatya",
+        "abhyasayoga",
+        "jnanayoga",
+        "karmayoga",
+        "maitri",
+        "samatva",
+        "viveka"
+      ],
+      "dataset_sha256": "e9bc910c3eaad4ecd7fb3edc1e65e67c2a5b6295065c81f46144d41b0d6546a6",
+      "duration_seconds": 0.000185
+    },
+    "tiny_classifier_training": {
+      "status": "PASS",
+      "algorithm": "multinomial_naive_bayes",
+      "is_generative_llm": false,
+      "training_rows": 28,
+      "training_example_accuracy": 1.0,
+      "training_accuracy_warning": "Training-set metric only; not held-out generalization.",
+      "artifact_round_trip": true,
+      "temporary_artifact_sha256": "f8f9811d5d44f181ce789d54a6833bc23d09525ca8940f7224a2fd5b74189c05",
+      "duration_seconds": 0.003086
+    },
+    "python_source_compile": {
+      "status": "PASS",
+      "files_compiled": 6,
+      "duration_seconds": 0.006167
+    },
+    "accelerator_probe": {
+      "status": "NOT_DETECTED",
+      "nvidia_smi_present": false,
+      "device_paths_detected": [],
+      "tpu_environment_hint": false,
+      "interpretation": "No supported accelerator signal was detected in this runner; do not infer that every underlying host lacks accelerators."
+    },
+    "large_llm_finetune": {
+      "status": "NOT_ATTEMPTED_RESOURCE_GUARD",
+      "reason": "Requires pinned model weights, license review, measured accelerator memory, and an approved compute budget."
+    }
+  },
+  "profiles": {
+    "cpu_virtual": {
+      "simulator_profile": {
+        "schema_version": "miilab.simulation.v1",
+        "evidence_class": "SIMULATION",
+        "generated_at": "2026-10-27T23:03:39.643970+00:00",
+        "profile": "cpu_virtual",
+        "device_class": "CPU",
+        "physical_hardware_provisioned": false,
+        "logical_slots": 4,
+        "logical_storage_units": 1000,
+        "job_count": 12,
+        "total_work_units": 10360,
+        "synthetic_units_per_tick": 10,
+        "simulated_ticks": 1037,
+        "status": "SIMULATED_COMPLETE",
+        "limitations": [
+          "Not a hardware benchmark",
+          "Not real wall-clock timing",
+          "No real storage or compute allocated"
+        ]
+      },
+      "task_comparisons": [
+        {
+          "task_id": "dataset_validation",
+          "description": "Parse and validate the checked-in synthetic dataset",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "tiny_classifier_training",
+          "description": "Train and serialize the small Naive Bayes baseline",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "python_source_compile",
+          "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "accelerator_probe",
+          "description": "Probe this runner for a detectable GPU/TPU accelerator",
+          "simulation_prediction": "SIMULATED_UNAVAILABLE",
+          "actual_runner_status": "NOT_DETECTED",
+          "comparison": "RESOURCE_ABSENCE_NOT_VERIFIED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "large_llm_finetune",
+          "description": "Fine-tune a large foundation model",
+          "simulation_prediction": "SIMULATED_UNAVAILABLE",
+          "actual_runner_status": "NOT_ATTEMPTED_RESOURCE_GUARD",
+          "comparison": "NOT_COMPARABLE_NOT_RUN",
+          "real_execution_attempted": false
+        }
+      ]
+    },
+    "gpu_virtual": {
+      "simulator_profile": {
+        "schema_version": "miilab.simulation.v1",
+        "evidence_class": "SIMULATION",
+        "generated_at": "2026-10-27T23:03:39.644008+00:00",
+        "profile": "gpu_virtual",
+        "device_class": "GPU",
+        "physical_hardware_provisioned": false,
+        "logical_slots": 16,
+        "logical_storage_units": 10000,
+        "job_count": 12,
+        "total_work_units": 10360,
+        "synthetic_units_per_tick": 160,
+        "simulated_ticks": 65,
+        "status": "SIMULATED_COMPLETE",
+        "limitations": [
+          "Not a hardware benchmark",
+          "Not real wall-clock timing",
+          "No real storage or compute allocated"
+        ]
+      },
+      "task_comparisons": [
+        {
+          "task_id": "dataset_validation",
+          "description": "Parse and validate the checked-in synthetic dataset",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "tiny_classifier_training",
+          "description": "Train and serialize the small Naive Bayes baseline",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "python_source_compile",
+          "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "accelerator_probe",
+          "description": "Probe this runner for a detectable GPU/TPU accelerator",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "NOT_DETECTED",
+          "comparison": "SIMULATION_REALITY_GAP_RESOURCE_NOT_DETECTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "large_llm_finetune",
+          "description": "Fine-tune a large foundation model",
+          "simulation_prediction": "SIMULATED_UNAVAILABLE",
+          "actual_runner_status": "NOT_ATTEMPTED_RESOURCE_GUARD",
+          "comparison": "NOT_COMPARABLE_NOT_RUN",
+          "real_execution_attempted": false
+        }
+      ]
+    },
+    "tpu_virtual": {
+      "simulator_profile": {
+        "schema_version": "miilab.simulation.v1",
+        "evidence_class": "SIMULATION",
+        "generated_at": "2026-10-27T23:03:39.644034+00:00",
+        "profile": "tpu_virtual",
+        "device_class": "TPU",
+        "physical_hardware_provisioned": false,
+        "logical_slots": 32,
+        "logical_storage_units": 20000,
+        "job_count": 12,
+        "total_work_units": 10360,
+        "synthetic_units_per_tick": 240,
+        "simulated_ticks": 44,
+        "status": "SIMULATED_COMPLETE",
+        "limitations": [
+          "Not a hardware benchmark",
+          "Not real wall-clock timing",
+          "No real storage or compute allocated"
+        ]
+      },
+      "task_comparisons": [
+        {
+          "task_id": "dataset_validation",
+          "description": "Parse and validate the checked-in synthetic dataset",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "tiny_classifier_training",
+          "description": "Train and serialize the small Naive Bayes baseline",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "python_source_compile",
+          "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "accelerator_probe",
+          "description": "Probe this runner for a detectable GPU/TPU accelerator",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "NOT_DETECTED",
+          "comparison": "SIMULATION_REALITY_GAP_RESOURCE_NOT_DETECTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "large_llm_finetune",
+          "description": "Fine-tune a large foundation model",
+          "simulation_prediction": "SIMULATED_UNAVAILABLE",
+          "actual_runner_status": "NOT_ATTEMPTED_RESOURCE_GUARD",
+          "comparison": "NOT_COMPARABLE_NOT_RUN",
+          "real_execution_attempted": false
+        }
+      ]
+    },
+    "server_virtual": {
+      "simulator_profile": {
+        "schema_version": "miilab.simulation.v1",
+        "evidence_class": "SIMULATION",
+        "generated_at": "2026-10-27T23:03:39.644057+00:00",
+        "profile": "server_virtual",
+        "device_class": "SERVER",
+        "physical_hardware_provisioned": false,
+        "logical_slots": 64,
+        "logical_storage_units": 100000,
+        "job_count": 12,
+        "total_work_units": 10360,
+        "synthetic_units_per_tick": 500,
+        "simulated_ticks": 21,
+        "status": "SIMULATED_COMPLETE",
+        "limitations": [
+          "Not a hardware benchmark",
+          "Not real wall-clock timing",
+          "No real storage or compute allocated"
+        ]
+      },
+      "task_comparisons": [
+        {
+          "task_id": "dataset_validation",
+          "description": "Parse and validate the checked-in synthetic dataset",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "tiny_classifier_training",
+          "description": "Train and serialize the small Naive Bayes baseline",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "python_source_compile",
+          "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "accelerator_probe",
+          "description": "Probe this runner for a detectable GPU/TPU accelerator",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "NOT_DETECTED",
+          "comparison": "SIMULATION_REALITY_GAP_RESOURCE_NOT_DETECTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "large_llm_finetune",
+          "description": "Fine-tune a large foundation model",
+          "simulation_prediction": "SIMULATED_UNAVAILABLE",
+          "actual_runner_status": "NOT_ATTEMPTED_RESOURCE_GUARD",
+          "comparison": "NOT_COMPARABLE_NOT_RUN",
+          "real_execution_attempted": false
+        }
+      ]
+    },
+    "infinity_space_server": {
+      "simulator_profile": {
+        "schema_version": "miilab.simulation.v1",
+        "evidence_class": "SIMULATION",
+        "generated_at": "2026-10-27T23:03:39.644084+00:00",
+        "profile": "infinity_space_server",
+        "device_class": "FICTIONAL_ELASTIC_SIMULATOR",
+        "physical_hardware_provisioned": false,
+        "logical_slots": "unbounded-in-simulator",
+        "logical_storage_units": "unbounded-in-simulator",
+        "job_count": 12,
+        "total_work_units": 10360,
+        "synthetic_units_per_tick": 1000,
+        "simulated_ticks": 11,
+        "status": "SIMULATED_COMPLETE",
+        "limitations": [
+          "Not a hardware benchmark",
+          "Not real wall-clock timing",
+          "No real storage or compute allocated"
+        ]
+      },
+      "task_comparisons": [
+        {
+          "task_id": "dataset_validation",
+          "description": "Parse and validate the checked-in synthetic dataset",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "tiny_classifier_training",
+          "description": "Train and serialize the small Naive Bayes baseline",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "python_source_compile",
+          "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "accelerator_probe",
+          "description": "Probe this runner for a detectable GPU/TPU accelerator",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "NOT_DETECTED",
+          "comparison": "SIMULATION_REALITY_GAP_RESOURCE_NOT_DETECTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "large_llm_finetune",
+          "description": "Fine-tune a large foundation model",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "NOT_ATTEMPTED_RESOURCE_GUARD",
+          "comparison": "NOT_COMPARABLE_NOT_RUN",
+          "real_execution_attempted": false
+        }
+      ]
+    }
+  },
+  "summary": {
+    "profile_count": 5,
+    "comparison_rows": 25,
+    "real_execution_attempts_counted_per_profile": 20,
+    "matching_comparisons": 15,
+    "simulation_reality_gaps_or_failures": 4,
+    "not_comparable_because_not_run": 5,
+    "large_model_training_claimed": false
+  },
+  "rules": [
+    "SIMULATED_SUCCESS is a prediction from declared synthetic assumptions, not evidence of real capability.",
+    "A task counts as real-run validated only when the same defined check executes and returns PASS in this runner.",
+    "NOT_DETECTED is not proof that the underlying host infrastructure has no accelerator.",
+    "A passing CI-runner check does not prove the task works on an Android device, production system, or external account.",
+    "Large foundation-model fine-tuning is deliberately not attempted in this gate."
+  ]
+}
