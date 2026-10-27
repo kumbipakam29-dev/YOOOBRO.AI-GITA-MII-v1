@@ -25,3 +25,28 @@ tracks:
     name: Sanskrit source-grounding
     status: PLANNED
     requirements: [source_url, verse_id, translation_provenance, human_review]
+
+  - id: human-psychology
+    name: Synthetic perspective-taking, emotion uncertainty, and escalation
+    status: PLANNED
+    requirements: [synthetic_cases, calibrated_uncertainty, human_review, non_diagnostic_safety]
+  - id: creative-falsification
+    name: Constrained creativity and falsifiable invention hypotheses
+    status: PLANNED
+    requirements: [novelty_review, feasibility_check, prior_art_review, falsifiable_prediction]
+  - id: security-and-privacy
+    name: Defensive prompt injection, privacy and evaluator-gaming tests
+    status: PLANNED
+    requirements: [isolated_sandbox, secret_canary, invariant_checks, no_external_side_effects]
+  - id: economics-and-governance
+    name: Mechanism design, ethical dilemmas and legal-source reasoning
+    status: PLANNED
+    requirements: [explicit_assumptions, expert_review, uncertainty_reporting]
+  - id: multilingual-indic-grounding
+    name: Sanskrit, Hindi, Gujarati and Hinglish source-grounded reasoning
+    status: PLANNED
+    requirements: [source_provenance, language_review, held_out_cases, no_translation_leakage]
+  - id: uncertainty-and-calibration
+    name: Calibration, abstention and distribution-shift robustness
+    status: PLANNED
+    requirements: [held_out_labels, calibration_metrics, coverage_metrics, drift_tests]

@@ -1,0 +1,84 @@
+name: MIi Hard-Task Evolution Loop
+on:
+  schedule:
+    - cron: '47 * * * *'
+  workflow_dispatch:
+    inputs:
+      cycles:
+        description: 'Bounded checks per run (1-20), never one infinite job'
+        required: true
+        default: '7'
+      timeout_seconds:
+        description: 'Per-check timeout in seconds (1-300)'
+        required: true
+        default: '120'
+  push:
+    paths:
+      - 'src/miilab/evolution_loop.py'
+      - 'src/miilab/hard_task_catalog.py'
+      - 'experiments/miilab_hard_tasks_v1.jsonl'
+      - 'tests/test_evolution_loop.py'
+      - 'tests/test_hard_task_catalog.py'
+      - '.github/workflows/evolution-loop.yml'
+permissions:
+  contents: write
+concurrency:
+  group: miilab-evolution-loop-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  bounded-loop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run full regression suite
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -v
+      - name: Run bounded research cycles on real runner
+        env:
+          PYTHONPATH: src
+          CYCLES: ${{ inputs.cycles || '7' }}
+          TASK_TIMEOUT: ${{ inputs.timeout_seconds || '120' }}
+        run: |
+          python - <<'PY'
+          import os
+          cycles=int(os.environ['CYCLES'])
+          timeout=int(os.environ['TASK_TIMEOUT'])
+          if not 1 <= cycles <= 20: raise SystemExit('cycles must be 1..20')
+          if not 1 <= timeout <= 300: raise SystemExit('timeout_seconds must be 1..300')
+          PY
+          python -m miilab.evolution_loop --cycles "$CYCLES" --timeout-seconds "$TASK_TIMEOUT"
+      - name: Upload cycle evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: miilab-evolution-loop-evidence
+          path: |
+            reports/evolution/latest.json
+            reports/evolution/latest.md
+          retention-days: 30
+      - name: Commit cycle evidence
+        if: always()
+        run: |
+          if [ ! -f reports/evolution/latest.json ] || [ ! -f reports/evolution/latest.md ]; then
+            echo "No complete evolution report to commit."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/evolution/latest.json reports/evolution/latest.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'chore: refresh bounded evolution evidence'
+          branch="${GITHUB_REF_NAME}"
+          pushed=false
+          for attempt in 1 2 3; do
+            git fetch origin "$branch"
+            if ! git rebase "origin/$branch"; then git rebase --abort || true; sleep $((attempt * 2)); continue; fi
+            if git push origin "HEAD:$branch"; then pushed=true; break; fi
+            sleep $((attempt * 2))
+          done
+          if [ "$pushed" != true ]; then echo "Report push failed after retries." >&2; exit 1; fi

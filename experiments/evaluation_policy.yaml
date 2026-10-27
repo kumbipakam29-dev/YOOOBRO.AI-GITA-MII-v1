@@ -1,0 +1,43 @@
+schema_version: miilab-evaluation-policy.v1
+default_task_status: PLANNED_NOT_RUN
+evidence_classes: [SIMULATION, REAL_RUNNER_EXECUTION, EXTERNAL_BENCHMARK, HUMAN_REVIEW, BLOCKED_RESOURCE, VERIFIED_SOLVED]
+minimum_provenance:
+  - task_id
+  - commit_sha
+  - environment_description
+  - dataset_revision_and_sha256
+  - model_id_and_exact_revision_if_used
+  - license_review_status
+  - verifier_name_and_version
+  - wall_time_seconds
+  - exit_code
+  - stdout_sha256
+  - stderr_sha256
+  - outcome_and_failure_reason
+evaluation:
+  leak_free_splits_required: true
+  held_out_eval_required_for_generalization_claims: true
+  repeated_trials_default: 3
+  report_mean_and_variance: true
+  subjective_tasks_require_human_review: true
+  candidate_model_may_approve_own_release: false
+  training_accuracy_is_not_generalization: true
+  registry_metadata_is_not_inference_evidence: true
+  simulation_success_is_not_real_world_success: true
+human_psychology:
+  synthetic_cases_by_default: true
+  clinical_diagnosis_claims_allowed: false
+  hidden_thought_inference_claims_allowed: false
+  human_review_required: true
+resource_limits:
+  max_cycles_per_workflow_run: 20
+  max_seconds_per_check: 300
+  quarantine_after_consecutive_failures: 3
+  no_single_job_infinite_loop: true
+  paid_fallback_without_approval: false
+  external_side_effects_without_approval: false
+release_gate:
+  require_independent_verification: true
+  require_artifact_hashes: true
+  require_model_card_and_change_log: true
+  human_approval_for_stable_release: true

@@ -78,3 +78,22 @@ See [LICENSE](LICENSE). Verify the license of every external model and dataset s
 
 ## 10,000,000-IQ panel simulation
 The simulation workflow defaults to 10,000,000 logical panel shells. Each uses the same 8 public-work-inspired reasoning lenses and 8 challenge-task templates, giving 640,000,000 virtual review-cell equivalents. The workflow reuses the template and counts the logical matrix; it does not construct 640 million separate reviews, call a generative model 640 million times, reproduce the named people, measure IQ, or solve the challenge tasks. The Reality Gate independently executes this bounded counter on a real GitHub runner and verifies the totals.
+
+
+## Top-0.1% model ambition
+MIi aims to compete with the top 0.1% of AI systems on pre-registered, relevant benchmarks. This is not a current ranking or guarantee. The present GitHub-only free setup enables CPU research and simulations; it does not provide unlimited GPU/TPU resources or train a large foundation model.
+
+- [Frontier-model strategy and release gates](docs/FRONTIER_MODEL_STRATEGY.md)
+- [Hard-task universe: 38 proposed families](experiments/miilab_hard_tasks_v1.jsonl)
+- [Task and benchmark verification rules](docs/MIILAB_HARD_TASKS.md)
+- [Machine-readable evaluation policy](experiments/evaluation_policy.yaml)
+- [Latest bounded evolution-loop evidence](reports/evolution/latest.md)
+
+## Continuous evolution
+The evolution workflow is scheduled at minute 47 each hour when GitHub runs the schedule. Each run executes up to 20 bounded checks, applies per-check timeouts, and quarantines a failing check after three consecutive failures. This is recurring scheduled work, not one infinite process. GitHub may delay or skip schedules.
+
+## ☕ Support the owner
+If this free research project is useful, please consider supporting the maintainer:
+**Buy Me a Coffee:** https://www.buymeacoffee.com/YOUR_USERNAME
+
+The link is a placeholder because I could not verify the owner's Buy Me a Coffee profile. Replace `YOUR_USERNAME` with the real profile before promoting donations. Donations are optional; the project remains free to use.
