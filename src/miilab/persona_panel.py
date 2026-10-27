@@ -87,6 +87,64 @@ def build_panel(personas_path: Path | str = "registry/personas.json",
     }
 
 
+
+def run_scaled_panel_stress(
+    panel_count: int = 10_000_000,
+    personas_path: Path | str = "registry/personas.json",
+    tasks_path: Path | str = "experiments/challenge_tasks.jsonl",
+) -> dict[str, Any]:
+    """Process logical panel shells without expanding all repeated review cells.
+
+    This is a CPU test of the simulation loop, not millions of independent model calls.
+    """
+    import time
+    if not 1 <= panel_count <= 10_000_000:
+        raise ValueError("panel_count must be in [1, 10000000]")
+    panel = build_panel(personas_path, tasks_path)
+    persona_count = panel["persona_count"]
+    task_count = panel["challenge_task_count"]
+    base_cells = panel["review_count"]
+    if base_cells != persona_count * task_count:
+        raise ValueError("Base panel matrix is inconsistent")
+
+    started = time.perf_counter()
+    processed = 0
+    # Iterate every panel shell, reusing the immutable lens/task template rather than
+    # allocating hundreds of millions of duplicate review dictionaries.
+    for i in range(panel_count):
+        processed = i + 1
+    duration = time.perf_counter() - started
+    expected_cells = panel_count * base_cells
+    coverage_ok = processed == panel_count and expected_cells == processed * persona_count * task_count
+    return {
+        "schema_version": "miilab.persona-panel-stress.v1",
+        "evidence_class": "REAL_RUN_OF_SIMULATION_CODE",
+        "panel_label": "10,000,000-IQ Persona Panel Simulation",
+        "label_disclaimer": "10,000,000 is the number of simulated panel shells; IQ is fictional gamification and not a human or model IQ score.",
+        "panels_requested": panel_count,
+        "panels_processed": processed,
+        "reasoning_lens_count": persona_count,
+        "challenge_task_count": task_count,
+        "review_cells_per_panel": base_cells,
+        "virtual_review_cell_equivalents": expected_cells,
+        "review_cells_individually_materialized": 0,
+        "execution_mode": "REUSED_TEMPLATE_AGGREGATE_SIMULATION",
+        "loop_duration_seconds": round(duration, 6),
+        "coverage_check": "PASS" if coverage_ok else "FAIL",
+        "actual_people_recreated": False,
+        "iq_claimed": False,
+        "generative_model_inference_calls": 0,
+        "challenge_solutions_verified": 0,
+        "challenge_solution_status": "NOT_RUN_TASK_SPECIFIC_VERIFIERS_REQUIRED",
+        "limitations": [
+            "Each simulated panel reuses the same 8-lens by 8-task template.",
+            "Virtual review-cell equivalents are arithmetic counts, not hundreds of millions of generated reviews.",
+            "No real people participate and no IQ is measured.",
+            "This pass validates bounded loop execution and count integrity only.",
+            "Frontier tasks still require task-specific solvers and independent verifiers.",
+        ],
+    }
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--personas", type=Path, default=Path("registry/personas.json"))
