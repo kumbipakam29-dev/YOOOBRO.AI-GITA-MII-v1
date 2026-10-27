@@ -53,8 +53,18 @@ python -m unittest discover -s tests -v
 ```
 Check the exact scripts and workflow configuration in the repository before enabling any scheduled job.
 
+## Simulation-to-reality validation
+The Simulation-to-Reality Validation workflow executes bounded repository-local tasks on a real GitHub-hosted runner, records actual outcomes, and compares them against the five virtual profiles. The first validated run passed 12 tests. Its actual task results were: dataset validation PASS, tiny classifier training PASS, Python source compile PASS, accelerator probe NOT_DETECTED, and large foundation-model fine-tuning NOT_ATTEMPTED_RESOURCE_GUARD.
+
+Latest reports:
+- [Hourly status report](reports/hourly/latest.md)
+- [Structured reality-gate evidence](evidence/reality_gate_latest.json)
+- [Validation rules and limitations](docs/SIMULATION_TO_REALITY.md)
+
+A simulation pass is not a real-world pass. A hosted-runner pass is not proof of success on an Android device or production system. The fictional infinity profile does not create unlimited resources.
+
 ## Hourly reporting
-The intended GitHub Actions workflow is best-effort and may be delayed by GitHub. It records status; it does not imply that a large model trains every hour. Enable the workflow only after its files are committed and validated.
+The GitHub Actions hourly workflow is enabled and scheduled for minute 17 each hour (UTC cron). GitHub may delay scheduled jobs. It runs bounded checks and commits the latest status/evidence report. It does not imply that a large model trains every hour.
 
 ## License
 See [LICENSE](LICENSE). Verify the license of every external model and dataset separately.
