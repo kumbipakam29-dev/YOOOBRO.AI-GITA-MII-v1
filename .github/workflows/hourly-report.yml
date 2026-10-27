@@ -12,6 +12,9 @@ on:
 permissions:
   actions: read
   contents: write
+concurrency:
+  group: miilab-hourly-report-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   report:
     runs-on: ubuntu-latest
@@ -77,7 +80,8 @@ jobs:
             f"- Simulation-to-reality gate: {report['reality_gate_step_outcome']}",
             f"- Comparison rows: {summary.get('comparison_rows', 'no report')}",
             f"- Matches: {summary.get('matching_comparisons', 'no report')}",
-            f"- Simulation/reality gaps or failures: {summary.get('simulation_reality_gaps_or_failures', 'no report')}",
+            f"- Simulation/reality gaps including resource-guard blocks: {summary.get('simulation_reality_gaps_or_failures_including_guard_blocks', summary.get('simulation_reality_gaps_or_failures', 'no report'))}",
+            f"- Simulated-success tasks blocked by the real runner: {summary.get('simulated_success_blocked_in_real_runner', 0)}",
             f"- Large-model fine-tuning claimed: {summary.get('large_model_training_claimed', False)}",
             "", "## Actual runner task statuses", ""
           ]
@@ -97,7 +101,25 @@ jobs:
             echo 'No report change.'
           else
             git commit -m 'chore: refresh hourly simulation-reality report'
-            git push
+            branch="${GITHUB_REF_NAME}"
+            pushed=false
+            for attempt in 1 2 3; do
+              git fetch origin "${branch}"
+              if ! git rebase "origin/${branch}"; then
+                git rebase --abort || true
+                sleep $((attempt * 2))
+                continue
+              fi
+              if git push origin "HEAD:${branch}"; then
+                pushed=true
+                break
+              fi
+              sleep $((attempt * 2))
+            done
+            if [ "${pushed}" != true ]; then
+              echo "Failed to push hourly report after retries." >&2
+              exit 1
+            fi
           fi
       - name: Mark report run failed if its checks failed
         if: steps.tests.outcome == 'failure' || steps.reality.outcome == 'failure'
