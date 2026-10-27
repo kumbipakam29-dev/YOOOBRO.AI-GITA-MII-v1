@@ -1,0 +1,25 @@
+name: Train Tiny CPU Baseline
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Train small classifier (not an LLM)
+        env:
+          PYTHONPATH: src
+        run: python -m miilab.trainer --data datasets/principle_intents.jsonl --output evidence/cpu_baseline_model.json --metrics evidence/latest_cpu_training.json
+      - name: Commit evidence
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add evidence/cpu_baseline_model.json evidence/latest_cpu_training.json
+          git commit -m 'experiment: record CPU baseline training evidence' || echo 'No evidence changes'
+          git push
