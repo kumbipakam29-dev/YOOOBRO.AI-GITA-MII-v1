@@ -63,6 +63,12 @@ Latest reports:
 
 A simulation pass is not a real-world pass. A hosted-runner pass is not proof of success on an Android device or production system. The fictional infinity profile does not create unlimited resources.
 
+## Fast virtual compute simulation
+The Virtual Compute Universe and Persona Panel workflow defaults to 1,000,000 logical jobs and fast sampled mode. It samples at most 4,096 jobs, a 244× reduction in simulated job samples for one million logical jobs. This is a speedup in the simulation's inner loop, not a guaranteed 100× reduction in total GitHub workflow wall time. Fast-mode ticks are estimates; exact mode is capped at 100,000 jobs. The infinity-space profile remains fictional and provisions no compute or storage.
+
+## 1,000,000-IQ Challenge Panel
+Eight reasoning lenses inspired by publicly known work of Albert Einstein, Alan Turing, Srinivasa Ramanujan, Ada Lovelace, Richard Feynman, Marie Curie, C. V. Raman, and A. P. J. Abdul Kalam review eight challenging task categories. The IQ label is fictional gamification, not a real score. The panel does not imitate exact voices or private thoughts, invent quotations, or claim to solve any challenge. See docs/PERSONA_PANEL.md.
+
 ## Hourly reporting
 The GitHub Actions hourly workflow is enabled and scheduled for minute 17 each hour (UTC cron). GitHub may delay scheduled jobs. It runs bounded checks and commits the latest status/evidence report. It does not imply that a large model trains every hour.
 

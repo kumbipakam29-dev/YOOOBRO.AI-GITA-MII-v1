@@ -18,6 +18,7 @@ from pathlib import Path
 
 from miilab.trainer import predict, read_rows, train
 from miilab.simulation import PROFILES, simulate
+from miilab.persona_panel import build_panel
 
 PROFILE_NAMES = list(PROFILES)
 
@@ -35,6 +36,11 @@ SIMULATED_TASKS = {
     },
     "python_source_compile": {
         "description": "Compile repository Python sources",
+        "simulated_success_profiles": PROFILE_NAMES,
+        "real_runner_safe": True,
+    },
+    "persona_panel_generation": {
+        "description": "Generate the public-work-inspired reasoning lens checklist panel",
         "simulated_success_profiles": PROFILE_NAMES,
         "real_runner_safe": True,
     },
@@ -118,6 +124,35 @@ def run_real_tasks(root):
         }
     except Exception as exc:
         results["python_source_compile"] = {
+            "status": "FAIL", "error_type": type(exc).__name__,
+            "error": str(exc), "duration_seconds": round(time.perf_counter() - started, 6),
+        }
+
+    started = time.perf_counter()
+    try:
+        panel = build_panel(root / "registry" / "personas.json", root / "experiments" / "challenge_tasks.jsonl")
+        reviews = panel["perspective_reviews"]
+        valid = (
+            panel["persona_count"] == 8
+            and panel["challenge_task_count"] == 8
+            and panel["review_count"] == 64
+            and all(row["status"] == "PERSPECTIVE_SIMULATION_NOT_SOLVED" for row in reviews)
+            and all(not row["named_person_is_actually_participating"] for row in reviews)
+            and all(row["iq_estimate"] is None for row in reviews)
+        )
+        results["persona_panel_generation"] = {
+            "status": "PASS" if valid else "FAIL",
+            "persona_count": panel["persona_count"],
+            "challenge_task_count": panel["challenge_task_count"],
+            "review_count": panel["review_count"],
+            "iq_claimed": panel["iq_claimed"],
+            "solutions_claimed": panel["solutions_claimed"],
+            "duration_seconds": round(time.perf_counter() - started, 6),
+        }
+        if not valid:
+            results["persona_panel_generation"]["error"] = "Panel schema or truthfulness guard failed"
+    except Exception as exc:
+        results["persona_panel_generation"] = {
             "status": "FAIL", "error_type": type(exc).__name__,
             "error": str(exc), "duration_seconds": round(time.perf_counter() - started, 6),
         }
@@ -278,7 +313,7 @@ def main():
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     markdown.write_text(render_markdown(report), encoding="utf-8")
     print(json.dumps(report["summary"], indent=2))
-    return 0 if all(results[key]["status"] == "PASS" for key in ("dataset_validation", "tiny_classifier_training", "python_source_compile")) else 1
+    return 0 if all(results[key]["status"] == "PASS" for key in ("dataset_validation", "tiny_classifier_training", "python_source_compile", "persona_panel_generation")) else 1
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -1,0 +1,118 @@
+{
+  "schema_version": "miilab.public-work-lens-registry.v1",
+  "panel_label": "1,000,000-IQ Challenge Panel",
+  "label_disclaimer": "The 1,000,000-IQ label is fictional gamification, not a psychometric score or claim about any person.",
+  "mode": "PUBLIC_WORK_INSPIRED_REASONING_LENSES_NOT_PERSON_REPLICAS",
+  "rules": [
+    "These are structured analytical lenses inspired by publicly known work, not reconstructions of the people.",
+    "Do not fabricate quotes, private thoughts, endorsements, or claims about what a person would actually say.",
+    "Every proposed solution must pass independent verification and a real execution gate where applicable.",
+    "A pattern, conjecture, simulation, or fluent explanation is not proof."
+  ],
+  "personas": [
+    {
+      "id": "einstein_first_principles",
+      "public_person": "Albert Einstein",
+      "field": "theoretical physics",
+      "lens": "first principles and thought experiments",
+      "review_questions": [
+        "Which assumptions are doing the most work?",
+        "Can the problem be simplified without changing its core?",
+        "What observation would falsify the proposed explanation?"
+      ],
+      "failure_mode_to_guard": "An elegant thought experiment can still disagree with evidence.",
+      "verification": "Derive explicit consequences and compare with evidence or a formal derivation."
+    },
+    {
+      "id": "turing_formal_methods",
+      "public_person": "Alan Turing",
+      "field": "mathematics and computing",
+      "lens": "formalization, algorithms, computability, edge cases",
+      "review_questions": [
+        "Can the task be stated as a precise input/output contract?",
+        "What is the algorithm and termination condition?",
+        "Which cases are undecidable, uncomputable, or outside the model?"
+      ],
+      "failure_mode_to_guard": "A program passing examples does not prove universal correctness.",
+      "verification": "Executable tests plus proof or model checking where feasible."
+    },
+    {
+      "id": "ramanujan_pattern_conjectures",
+      "public_person": "Srinivasa Ramanujan",
+      "field": "mathematics",
+      "lens": "pattern discovery and conjecture generation",
+      "review_questions": [
+        "What invariant or pattern appears across examples?",
+        "What is the smallest counterexample search?",
+        "What proof is required beyond observed examples?"
+      ],
+      "failure_mode_to_guard": "Numerical agreement on many cases is not a general proof.",
+      "verification": "Independent symbolic derivation, theorem prover, or verified counterexample."
+    },
+    {
+      "id": "lovelace_algorithmic_systems",
+      "public_person": "Ada Lovelace",
+      "field": "early computing and algorithms",
+      "lens": "algorithm structure, representations, and consequences",
+      "review_questions": [
+        "What are the exact steps and intermediate representations?",
+        "Which parts are computable from the available inputs?",
+        "What assumptions and error bounds must be exposed?"
+      ],
+      "failure_mode_to_guard": "A detailed algorithm can still depend on unavailable or invalid inputs.",
+      "verification": "Run reference examples and compare outputs against a test oracle."
+    },
+    {
+      "id": "feynman_simplification",
+      "public_person": "Richard Feynman",
+      "field": "physics",
+      "lens": "simplify, sanity-check, explain, and try to break the model",
+      "review_questions": [
+        "Can the result be explained in plain language?",
+        "Does dimensional or order-of-magnitude analysis make sense?",
+        "What simple experiment or counterexample challenges the answer?"
+      ],
+      "failure_mode_to_guard": "A simple analogy may hide essential complexity.",
+      "verification": "Check units, boundary cases, and independent calculations."
+    },
+    {
+      "id": "curie_empirical_evidence",
+      "public_person": "Marie Curie",
+      "field": "experimental science",
+      "lens": "measurement, uncertainty, reproducibility, provenance",
+      "review_questions": [
+        "What was measured directly versus inferred?",
+        "Are controls, calibration, and uncertainty described?",
+        "Can another person reproduce the result from the recorded method?"
+      ],
+      "failure_mode_to_guard": "A result without provenance or replication is not strong evidence.",
+      "verification": "Record data/source hashes, methods, controls, and replication outcome."
+    },
+    {
+      "id": "raman_measurement_alternatives",
+      "public_person": "C. V. Raman",
+      "field": "experimental physics",
+      "lens": "measurement and competing physical explanations",
+      "review_questions": [
+        "What measurable signal distinguishes the hypotheses?",
+        "Could instrument behavior or confounding explain the observation?",
+        "What independent measurement would discriminate the alternatives?"
+      ],
+      "failure_mode_to_guard": "Correlation or one measurement may not identify the cause.",
+      "verification": "Repeat measurement with controls and independent instrumentation or analysis."
+    },
+    {
+      "id": "kalam_systems_engineering",
+      "public_person": "A. P. J. Abdul Kalam",
+      "field": "aerospace engineering and science leadership",
+      "lens": "systems decomposition, feasibility, failure modes, societal impact",
+      "review_questions": [
+        "Can the mission be decomposed into testable milestones?",
+        "What resource, reliability, and safety constraints dominate?",
+        "Which subsystem failure would invalidate the entire plan?"
+      ],
+      "failure_mode_to_guard": "A compelling mission plan is not evidence that the system is feasible.",
+      "verification": "Subsystem tests, resource budget, risk register, integration test, and human sign-off."
+    }
+  ]
+}

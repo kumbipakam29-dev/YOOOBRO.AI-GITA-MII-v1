@@ -8,7 +8,7 @@ class RealityGateTests(unittest.TestCase):
         self.assertIn("infinity_space_server", PROFILE_NAMES)
 
     def test_safe_tasks_have_simulated_expected_success(self):
-        for task_id in ("dataset_validation", "tiny_classifier_training", "python_source_compile"):
+        for task_id in ("dataset_validation", "tiny_classifier_training", "python_source_compile", "persona_panel_generation"):
             self.assertEqual(set(SIMULATED_TASKS[task_id]["simulated_success_profiles"]), set(PROFILE_NAMES))
 
     def test_simulation_pass_requires_actual_pass(self):

@@ -1,11 +1,19 @@
-name: Virtual Compute Universe Simulation
+name: Virtual Compute Universe and Persona Panel
 on:
   workflow_dispatch:
     inputs:
       jobs:
-        description: 'Number of synthetic jobs (1-1000)'
+        description: 'Logical jobs (1-10000000); fast mode estimates above 4096'
         required: true
-        default: '12'
+        default: '1000000'
+      mode:
+        description: 'Fast sampled estimate or bounded exact run'
+        required: true
+        type: choice
+        options:
+          - fast
+          - exact
+        default: fast
 permissions:
   contents: read
 jobs:
@@ -17,13 +25,34 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Simulate CPU/GPU/TPU/server/infinity profiles
+      - name: Validate requested workload
+        env:
+          JOB_COUNT: ${{ inputs.jobs }}
+          SIM_MODE: ${{ inputs.mode }}
+        run: |
+          python - <<'PY'
+          import os
+          jobs = int(os.environ["JOB_COUNT"])
+          mode = os.environ["SIM_MODE"]
+          if not 1 <= jobs <= 10_000_000:
+              raise SystemExit("jobs must be between 1 and 10,000,000")
+          if mode == "exact" and jobs > 100_000:
+              raise SystemExit("Exact mode is capped at 100,000 jobs; use fast mode for bigger runs")
+          PY
+      - name: Run optimized virtual compute profiles
         env:
           PYTHONPATH: src
           JOB_COUNT: ${{ inputs.jobs }}
-        run: python -m miilab.simulation --profile all --jobs "$JOB_COUNT" --output /tmp/virtual-compute-simulation.json
+          SIM_MODE: ${{ inputs.mode }}
+        run: python -m miilab.simulation --profile all --jobs "$JOB_COUNT" --mode "$SIM_MODE" --output /tmp/virtual-compute-simulation.json
+      - name: Run 1,000,000-IQ public-work-inspired persona panel
+        env:
+          PYTHONPATH: src
+        run: python -m miilab.persona_panel --output /tmp/persona-panel-simulation.json
       - uses: actions/upload-artifact@v4
         with:
-          name: virtual-compute-simulation-not-hardware
-          path: /tmp/virtual-compute-simulation.json
+          name: virtual-compute-and-persona-simulation-not-hardware
+          path: |
+            /tmp/virtual-compute-simulation.json
+            /tmp/persona-panel-simulation.json
           retention-days: 30
