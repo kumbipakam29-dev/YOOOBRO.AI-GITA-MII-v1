@@ -1,0 +1,29 @@
+name: Virtual Compute Universe Simulation
+on:
+  workflow_dispatch:
+    inputs:
+      jobs:
+        description: 'Number of synthetic jobs (1-1000)'
+        required: true
+        default: '12'
+permissions:
+  contents: read
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Simulate CPU/GPU/TPU/server/infinity profiles
+        env:
+          PYTHONPATH: src
+          JOB_COUNT: ${{ inputs.jobs }}
+        run: python -m miilab.simulation --profile all --jobs "$JOB_COUNT" --output /tmp/virtual-compute-simulation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: virtual-compute-simulation-not-hardware
+          path: /tmp/virtual-compute-simulation.json
+          retention-days: 30
