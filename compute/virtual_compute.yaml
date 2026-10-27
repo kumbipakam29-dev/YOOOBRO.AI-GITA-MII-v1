@@ -1,0 +1,33 @@
+schema_version: miilab.virtual-compute.v1
+evidence_class: SIMULATION
+physical_hardware_provisioned: false
+profiles:
+  cpu_virtual:
+    device_class: CPU
+    slots: 4
+    synthetic_units_per_tick: 10
+    storage_units: 1000
+  gpu_virtual:
+    device_class: GPU
+    slots: 16
+    synthetic_units_per_tick: 160
+    storage_units: 10000
+  tpu_virtual:
+    device_class: TPU
+    slots: 32
+    synthetic_units_per_tick: 240
+    storage_units: 20000
+  server_virtual:
+    device_class: SERVER
+    slots: 64
+    synthetic_units_per_tick: 500
+    storage_units: 100000
+  infinity_space_server:
+    device_class: FICTIONAL_ELASTIC_SIMULATOR
+    slots: null
+    synthetic_units_per_tick: 1000
+    storage_units: null
+limitations:
+  - Values are synthetic scheduling assumptions, not FLOPS or measured runtime.
+  - Null means unbounded in the simulator only.
+  - No real hardware, storage, network or paid service is provisioned.
