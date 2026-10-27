@@ -13,7 +13,7 @@ This repository separates the research program from the YOOOBRO.AI Android appli
 - Keep simulated results, training-set metrics, held-out evaluation, and real-world performance explicitly separate.
 
 ## Honest status
-This repository was just created and is currently being bootstrapped. No frontier model is claimed to have been trained here. A virtual CPU/GPU/TPU/server profile is a simulation only; it does not create physical or unlimited compute. Tiny baseline experiments do not constitute a generative LLM.
+The initial research scaffold is in place. GitHub Actions CI, the bounded evolution loop, and the Simulation-to-Reality gate have passed their latest recorded runs on a hosted runner. No frontier model is claimed to have been trained here. Virtual CPU/GPU/TPU/server profiles are simulations only; they do not create physical or unlimited compute. The tiny Naive Bayes baseline is a real CPU-trained classifier, not a generative LLM.
 
 ## MIi generations (proposed roadmap)
 | Generation | Sanskrit name | Research theme |
@@ -94,6 +94,6 @@ The evolution workflow is scheduled at minute 47 each hour when GitHub runs the 
 
 ## ☕ Support the owner
 If this free research project is useful, please consider supporting the maintainer:
-**Buy Me a Coffee:** https://www.buymeacoffee.com/YOUR_USERNAME
+**[☕ Buy Me a Coffee](https://www.buymeacoffee.com/YOUR_USERNAME)**
 
 The link is a placeholder because I could not verify the owner's Buy Me a Coffee profile. Replace `YOUR_USERNAME` with the real profile before promoting donations. Donations are optional; the project remains free to use.
