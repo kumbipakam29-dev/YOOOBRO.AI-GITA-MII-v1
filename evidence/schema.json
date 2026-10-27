@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MIi Run Evidence",
+  "type": "object",
+  "required": ["schema_version", "evidence_class"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "evidence_class": {"enum": ["ACTUAL_TRAINING", "SIMULATION", "PUBLIC_METADATA", "EVALUATION"]},
+    "run_id": {"type": "string"},
+    "training_performed": {"type": "boolean"},
+    "dataset_sha256": {"type": "string"},
+    "model_artifact_sha256": {"type": "string"},
+    "commit_sha": {"type": ["string", "null"]},
+    "metrics": {"type": "object"},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}
