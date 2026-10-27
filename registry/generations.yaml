@@ -1,0 +1,52 @@
+registry_version: 0.1.0
+status_policy: "All records are proposals until artifacts and tests are recorded."
+generations:
+  - id: MIi-Viveka
+    generation: 1
+    display_name: "विवेक (Viveka)"
+    theme: discernment
+    shlokas: [BG-2.16, BG-2.48]
+    focus: [evidence_provenance, uncertainty_calibration, independent_verification]
+    state: PLANNED
+  - id: MIi-KarmaYoga
+    generation: 2
+    display_name: "कर्मयोग (KarmaYoga)"
+    theme: disciplined_action
+    shlokas: [BG-2.47, BG-2.48]
+    focus: [tool_use, planning, bounded_execution, human_approval]
+    state: PLANNED
+  - id: MIi-JnanaYoga
+    generation: 3
+    display_name: "ज्ञानयोग (JnanaYoga)"
+    theme: grounded_knowledge
+    shlokas: [BG-4.38]
+    focus: [retrieval_grounding, multilingual_learning, source_aware_explanations]
+    state: PLANNED
+  - id: MIi-AbhyasaYoga
+    generation: 4
+    display_name: "अभ्यासयोग (AbhyasaYoga)"
+    theme: sustained_practice
+    shlokas: [BG-6.35]
+    focus: [repeatable_training, checkpointing, regression_gates]
+    state: PLANNED
+  - id: MIi-Samatva
+    generation: 5
+    display_name: "समत्व (Samatva)"
+    theme: balance
+    shlokas: [BG-2.48]
+    focus: [robustness, perturbation_tests, bias_checks]
+    state: PLANNED
+  - id: MIi-Maitri
+    generation: 6
+    display_name: "मैत्री (Maitri)"
+    theme: friendly_compassion
+    shlokas: [BG-12.13]
+    focus: [respectful_helpfulness, support_boundaries, safety]
+    state: PLANNED
+  - id: MIi-AbhayaSatya
+    generation: 7
+    display_name: "अभय-सत्य (Abhaya-Satya)"
+    theme: fearlessness_and_truth
+    shlokas: [BG-16.1]
+    focus: [transparent_limits, evidence_linking, security, failure_reporting]
+    state: PLANNED
