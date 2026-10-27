@@ -32,9 +32,15 @@ class RealityGateTests(unittest.TestCase):
             "RESOURCE_ABSENCE_NOT_VERIFIED"
         )
 
-    def test_large_training_is_not_comparable_when_guarded(self):
+    def test_large_training_is_blocked_when_infinity_simulation_overpromises(self):
         self.assertEqual(
             classify_comparison("SIMULATED_SUCCESS", "NOT_ATTEMPTED_RESOURCE_GUARD"),
+            "SIMULATED_SUCCESS_REAL_BLOCKED_GUARD"
+        )
+
+    def test_unavailable_prediction_and_guarded_task_remain_not_comparable(self):
+        self.assertEqual(
+            classify_comparison("SIMULATED_UNAVAILABLE", "NOT_ATTEMPTED_RESOURCE_GUARD"),
             "NOT_COMPARABLE_NOT_RUN"
         )
 
