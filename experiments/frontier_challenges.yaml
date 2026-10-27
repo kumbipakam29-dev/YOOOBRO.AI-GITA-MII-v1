@@ -1,0 +1,27 @@
+schema_version: miilab.frontier-challenges.v1
+status_policy: "PLANNED does not mean run or solved."
+tracks:
+  - id: hard-math
+    name: Hard mathematical reasoning
+    status: PLANNED
+    requirements: [benchmark_license_review, pinned_split, independent_verifier, reproducible_run]
+  - id: formal-proof
+    name: Formal theorem proving
+    status: PLANNED
+    requirements: [proof_assistant, machine_checkable_proof, verifier_logs]
+  - id: repository-engineering
+    name: Repository-level software engineering
+    status: PLANNED
+    requirements: [isolated_sandbox, hidden_tests, patch_diff, regression_results]
+  - id: interactive-adaptation
+    name: Interactive adaptation and long-horizon planning
+    status: PLANNED
+    requirements: [pinned_environment, action_trace, reward_definition, repeated_trials]
+  - id: scientific-replication
+    name: Scientific replication
+    status: PLANNED
+    requirements: [source_papers, data_rights, pinned_environment, independent_reproduction]
+  - id: sanskrit-grounding
+    name: Sanskrit source-grounding
+    status: PLANNED
+    requirements: [source_url, verse_id, translation_provenance, human_review]
