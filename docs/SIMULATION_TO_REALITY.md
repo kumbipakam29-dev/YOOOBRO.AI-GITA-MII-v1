@@ -34,3 +34,7 @@ Then run: python -m miilab.reality_gate
 
 ## 10M persona panel stress validation
 The Reality Gate runs a bounded 10,000,000-panel simulation counter on the actual GitHub runner. It verifies that 10,000,000 panel shells are processed and that their template implies 640,000,000 virtual review-cell equivalents. Only the panel-shell loop executes; all repeated lens/task cells reuse the same immutable template. No large model inference is performed, no human IQ is measured, and no frontier challenge is marked solved by this counter.
+
+
+## Explicit simulation over-promise accounting
+If a virtual profile predicts `SIMULATED_SUCCESS` but the same real task is blocked by a resource guard, the gate records `SIMULATED_SUCCESS_REAL_BLOCKED_GUARD`. This is counted as a simulation/reality gap rather than hidden in the not-run bucket. When both the simulator and the real gate agree that a task is unavailable and it is not attempted, it remains `NOT_COMPARABLE_NOT_RUN`.
