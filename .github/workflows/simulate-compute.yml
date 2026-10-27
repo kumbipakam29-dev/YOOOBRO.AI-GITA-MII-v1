@@ -1,5 +1,12 @@
 name: Virtual Compute Universe and Persona Panel
 on:
+  push:
+    paths:
+      - 'src/miilab/simulation.py'
+      - 'src/miilab/persona_panel.py'
+      - 'registry/personas.json'
+      - 'experiments/challenge_tasks.jsonl'
+      - '.github/workflows/simulate-compute.yml'
   workflow_dispatch:
     inputs:
       jobs:
@@ -27,8 +34,8 @@ jobs:
           python-version: '3.11'
       - name: Validate requested workload
         env:
-          JOB_COUNT: ${{ inputs.jobs }}
-          SIM_MODE: ${{ inputs.mode }}
+          JOB_COUNT: ${{ inputs.jobs || '1000000' }}
+          SIM_MODE: ${{ inputs.mode || 'fast' }}
         run: |
           python - <<'PY'
           import os
@@ -42,9 +49,9 @@ jobs:
       - name: Run optimized virtual compute profiles
         env:
           PYTHONPATH: src
-          JOB_COUNT: ${{ inputs.jobs }}
-          SIM_MODE: ${{ inputs.mode }}
-        run: python -m miilab.simulation --profile all --jobs "$JOB_COUNT" --mode "$SIM_MODE" --output /tmp/virtual-compute-simulation.json
+          JOB_COUNT: ${{ inputs.jobs || '1000000' }}
+          SIM_MODE: ${{ inputs.mode || 'fast' }}
+        run: python -m miilab.simulation --profile all --jobs "$JOB_COUNT" --mode "$SIM_MODE" --max-ticks 1000000000 --output /tmp/virtual-compute-simulation.json
       - name: Run 1,000,000-IQ public-work-inspired persona panel
         env:
           PYTHONPATH: src

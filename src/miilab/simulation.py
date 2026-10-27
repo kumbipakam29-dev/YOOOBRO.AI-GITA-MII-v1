@@ -57,8 +57,8 @@ def simulate(name: str, jobs: int = 12, seed: int = 42, mode: str = "exact",
         raise ValueError("mode must be 'exact' or 'fast'")
     if not 1 <= jobs <= MAX_FAST_JOBS:
         raise ValueError(f"jobs must be in [1, {MAX_FAST_JOBS}]")
-    if not 1 <= sample_size <= 100_000:
-        raise ValueError("sample_size must be in [1, 100000]")
+    if not 64 <= sample_size <= 100_000:
+        raise ValueError("sample_size must be in [64, 100000] so every finite profile has at least one sample batch")
     if not 1 <= max_ticks <= 1_000_000_000:
         raise ValueError("max_ticks must be in [1, 1000000000]")
     if mode == "exact" and jobs > MAX_EXACT_JOBS:
@@ -135,7 +135,7 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--mode", choices=["fast", "exact"], default="fast")
     parser.add_argument("--sample-size", type=int, default=FAST_SAMPLE_SIZE)
-    parser.add_argument("--max-ticks", type=int, default=100_000)
+    parser.add_argument("--max-ticks", type=int, default=1_000_000_000)
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
     names = list(PROFILES) if args.profile == "all" else [args.profile]

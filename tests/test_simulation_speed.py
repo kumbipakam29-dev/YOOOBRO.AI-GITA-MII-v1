@@ -27,6 +27,10 @@ class FastSimulationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             simulate("cpu_virtual", jobs=MAX_EXACT_JOBS + 1, mode="exact")
 
+    def test_sample_size_has_minimum_for_finite_batch_estimates(self):
+        with self.assertRaises(ValueError):
+            simulate("gpu_virtual", jobs=1_000_000, mode="fast", sample_size=1)
+
     def test_unknown_profile_is_rejected(self):
         with self.assertRaises(ValueError):
             simulate("quantum_magic", jobs=1)
