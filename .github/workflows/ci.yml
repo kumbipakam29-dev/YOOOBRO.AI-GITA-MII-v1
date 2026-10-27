@@ -1,7 +1,13 @@
 name: MIi Research CI
 on:
   push:
+    paths-ignore:
+      - 'reports/**'
+      - 'evidence/**'
   pull_request:
+    paths-ignore:
+      - 'reports/**'
+      - 'evidence/**'
   workflow_dispatch:
 permissions:
   contents: read
