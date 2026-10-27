@@ -1,0 +1,38 @@
+name: Simulation-to-Reality Validation
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/miilab/**'
+      - 'tests/**'
+      - 'datasets/**'
+      - '.github/workflows/reality-validation.yml'
+permissions:
+  contents: read
+jobs:
+  reality-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Execute actual bounded tasks and compare simulation predictions
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m unittest discover -s tests -v
+          python -m miilab.reality_gate --output evidence/reality_gate_latest.json --markdown-output reports/reality/reality_gate_latest.md
+      - name: Add report to job summary
+        if: always()
+        run: |
+          if [ -f reports/reality/reality_gate_latest.md ]; then cat reports/reality/reality_gate_latest.md >> "$GITHUB_STEP_SUMMARY"; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: simulation-to-reality-evidence
+          path: |
+            evidence/reality_gate_latest.json
+            reports/reality/reality_gate_latest.md
+          retention-days: 30
