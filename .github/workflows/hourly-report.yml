@@ -1,0 +1,57 @@
+name: MIi Hourly Status Report
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Record status snapshot
+        run: |
+          mkdir -p reports/hourly
+          python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          report = {
+            "schema_version":"miilab.hourly-report.v1",
+            "generated_at":datetime.now(timezone.utc).isoformat(),
+            "repository":os.getenv("GITHUB_REPOSITORY"),
+            "commit_sha":os.getenv("GITHUB_SHA"),
+            "workflow_run_id":os.getenv("GITHUB_RUN_ID"),
+            "report_type":"BEST_EFFORT_STATUS_SNAPSHOT",
+            "model_training_claim":"No large model is trained by this report workflow.",
+            "virtual_compute":"SIMULATION_ONLY",
+            "pending":["Frontier tasks require separate authorized benchmark runs","No MIi generative LLM weights are claimed by this workflow"],
+          }
+          Path("reports/hourly/latest.json").write_text(json.dumps(report, indent=2)+"\n")
+          Path("reports/hourly/latest.md").write_text(
+            "# MIi Hourly Status Snapshot\n\n"
+            f"- Generated UTC: {report['generated_at']}\n"
+            f"- Repository: {report['repository']}\n"
+            f"- Commit: {report['commit_sha']}\n"
+            "- Model training: no large-model training is performed by this workflow.\n"
+            "- Virtual compute: simulation only, not real hardware.\n"
+            "- This is best-effort; GitHub may delay scheduled runs.\n"
+          )
+          PY
+      - name: Commit status snapshot if changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/hourly/latest.json reports/hourly/latest.md
+          if git diff --cached --quiet; then
+            echo 'No report change.'
+          else
+            git commit -m 'chore: refresh hourly status snapshot'
+            git push
+          fi
