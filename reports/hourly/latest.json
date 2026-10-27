@@ -1,17 +1,17 @@
 {
   "schema_version": "miilab.hourly-report.v2",
-  "generated_at": "2026-10-27T23:03:39.703493+00:00",
+  "generated_at": "2026-10-27T23:14:40.671540+00:00",
   "repository": "kumbipakam29-dev/YOOOBRO.AI-GITA-MII-v1",
-  "commit_sha": "abebcdf356155e3a845dd04f49ac15eed05b59d0",
-  "workflow_run_id": "40599406318",
+  "commit_sha": "4240ba4e23c2a44e807722152e00006c30c328da",
+  "workflow_run_id": "40600753628",
   "report_type": "BEST_EFFORT_HOURLY_STATUS_AND_REALITY_GATE",
   "test_step_outcome": "success",
   "reality_gate_step_outcome": "success",
   "reality_gate_summary": {
     "profile_count": 5,
-    "comparison_rows": 25,
-    "real_execution_attempts_counted_per_profile": 20,
-    "matching_comparisons": 15,
+    "comparison_rows": 30,
+    "real_execution_attempts_counted_per_profile": 25,
+    "matching_comparisons": 20,
     "simulation_reality_gaps_or_failures": 4,
     "not_comparable_because_not_run": 5,
     "large_model_training_claimed": false
@@ -20,6 +20,7 @@
     "dataset_validation": "PASS",
     "tiny_classifier_training": "PASS",
     "python_source_compile": "PASS",
+    "persona_panel_generation": "PASS",
     "accelerator_probe": "NOT_DETECTED",
     "large_llm_finetune": "NOT_ATTEMPTED_RESOURCE_GUARD"
   },

@@ -1,10 +1,10 @@
 # Simulation-to-Reality Gate
 
-- Generated UTC: 2026-10-27T23:03:39.644141+00:00
+- Generated UTC: 2026-10-27T23:14:40.614526+00:00
 - Evidence class: MIXED_SIMULATION_AND_REAL_RUNNER_EXECUTION
 - Profiles compared: 5
-- Comparison rows: 25
-- Matching comparisons: 15
+- Comparison rows: 30
+- Matching comparisons: 20
 - Simulation/reality gaps or failures: 4
 - Not comparable (task intentionally not run): 5
 
@@ -15,6 +15,7 @@
 | dataset_validation | PASS |  |
 | tiny_classifier_training | PASS | True |
 | python_source_compile | PASS |  |
+| persona_panel_generation | PASS |  |
 | accelerator_probe | NOT_DETECTED | No supported accelerator signal was detected in this runner; do not infer that every underlying host lacks accelerators. |
 | large_llm_finetune | NOT_ATTEMPTED_RESOURCE_GUARD | Requires pinned model weights, license review, measured accelerator memory, and an approved compute budget. |
 

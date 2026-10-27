@@ -1,6 +1,6 @@
 {
   "schema_version": "miilab.reality-gate.v1",
-  "generated_at": "2026-10-27T23:03:39.644141+00:00",
+  "generated_at": "2026-10-27T23:14:40.614526+00:00",
   "evidence_class": "MIXED_SIMULATION_AND_REAL_RUNNER_EXECUTION",
   "execution_environment": {
     "provider": "GitHub Actions runner when run in CI",
@@ -15,7 +15,7 @@
   },
   "evidence_hashes": {
     "dataset_sha256": "e9bc910c3eaad4ecd7fb3edc1e65e67c2a5b6295065c81f46144d41b0d6546a6",
-    "reality_gate_script_sha256": "3fc5166630afa09e2a86f5277fed7ce429b20dc95b19409f554d34996645952a"
+    "reality_gate_script_sha256": "257383d8aaf90672e7ff08269c795b8de41cf9a0428d4bf311ff64112bd391b7"
   },
   "real_world_scope": "Actual code execution in this CI runner, restricted to bounded repository-local checks; not a production deployment test.",
   "real_task_results": {
@@ -32,7 +32,7 @@
         "viveka"
       ],
       "dataset_sha256": "e9bc910c3eaad4ecd7fb3edc1e65e67c2a5b6295065c81f46144d41b0d6546a6",
-      "duration_seconds": 0.000185
+      "duration_seconds": 0.000141
     },
     "tiny_classifier_training": {
       "status": "PASS",
@@ -43,12 +43,21 @@
       "training_accuracy_warning": "Training-set metric only; not held-out generalization.",
       "artifact_round_trip": true,
       "temporary_artifact_sha256": "f8f9811d5d44f181ce789d54a6833bc23d09525ca8940f7224a2fd5b74189c05",
-      "duration_seconds": 0.003086
+      "duration_seconds": 0.002486
     },
     "python_source_compile": {
       "status": "PASS",
-      "files_compiled": 6,
-      "duration_seconds": 0.006167
+      "files_compiled": 9,
+      "duration_seconds": 0.007188
+    },
+    "persona_panel_generation": {
+      "status": "PASS",
+      "persona_count": 8,
+      "challenge_task_count": 8,
+      "review_count": 64,
+      "iq_claimed": false,
+      "solutions_claimed": false,
+      "duration_seconds": 0.000233
     },
     "accelerator_probe": {
       "status": "NOT_DETECTED",
@@ -65,23 +74,53 @@
   "profiles": {
     "cpu_virtual": {
       "simulator_profile": {
-        "schema_version": "miilab.simulation.v1",
+        "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:03:39.643970+00:00",
+        "generated_at": "2026-10-27T23:14:40.614402+00:00",
         "profile": "cpu_virtual",
         "device_class": "CPU",
         "physical_hardware_provisioned": false,
         "logical_slots": 4,
         "logical_storage_units": 1000,
         "job_count": 12,
+        "sampled_jobs": 12,
+        "sampling_reduction_factor": 1.0,
+        "requested_mode": "exact",
+        "execution_mode": "EXACT",
+        "work_units_estimated": false,
         "total_work_units": 10360,
         "synthetic_units_per_tick": 10,
+        "batch_count": 3,
         "simulated_ticks": 1037,
+        "max_ticks": 100000,
         "status": "SIMULATED_COMPLETE",
+        "batch_detail_included": true,
+        "batches": [
+          {
+            "batch": 1,
+            "jobs": 4,
+            "work_units": 3087,
+            "simulated_ticks": 309
+          },
+          {
+            "batch": 2,
+            "jobs": 4,
+            "work_units": 4537,
+            "simulated_ticks": 454
+          },
+          {
+            "batch": 3,
+            "jobs": 4,
+            "work_units": 2736,
+            "simulated_ticks": 274
+          }
+        ],
         "limitations": [
           "Not a hardware benchmark",
           "Not real wall-clock timing",
-          "No real storage or compute allocated"
+          "No real storage or compute allocated",
+          "Fast sampled mode estimates large workloads from a deterministic sample",
+          "Fictional unbounded capacity is only a model assumption"
         ]
       },
       "task_comparisons": [
@@ -104,6 +143,14 @@
         {
           "task_id": "python_source_compile",
           "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "persona_panel_generation",
+          "description": "Generate the public-work-inspired reasoning lens checklist panel",
           "simulation_prediction": "SIMULATED_SUCCESS",
           "actual_runner_status": "PASS",
           "comparison": "MATCH_TASK_EXECUTED",
@@ -129,23 +176,41 @@
     },
     "gpu_virtual": {
       "simulator_profile": {
-        "schema_version": "miilab.simulation.v1",
+        "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:03:39.644008+00:00",
+        "generated_at": "2026-10-27T23:14:40.614426+00:00",
         "profile": "gpu_virtual",
         "device_class": "GPU",
         "physical_hardware_provisioned": false,
         "logical_slots": 16,
         "logical_storage_units": 10000,
         "job_count": 12,
+        "sampled_jobs": 12,
+        "sampling_reduction_factor": 1.0,
+        "requested_mode": "exact",
+        "execution_mode": "EXACT",
+        "work_units_estimated": false,
         "total_work_units": 10360,
         "synthetic_units_per_tick": 160,
+        "batch_count": 1,
         "simulated_ticks": 65,
+        "max_ticks": 100000,
         "status": "SIMULATED_COMPLETE",
+        "batch_detail_included": true,
+        "batches": [
+          {
+            "batch": 1,
+            "jobs": 12,
+            "work_units": 10360,
+            "simulated_ticks": 65
+          }
+        ],
         "limitations": [
           "Not a hardware benchmark",
           "Not real wall-clock timing",
-          "No real storage or compute allocated"
+          "No real storage or compute allocated",
+          "Fast sampled mode estimates large workloads from a deterministic sample",
+          "Fictional unbounded capacity is only a model assumption"
         ]
       },
       "task_comparisons": [
@@ -168,6 +233,14 @@
         {
           "task_id": "python_source_compile",
           "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "persona_panel_generation",
+          "description": "Generate the public-work-inspired reasoning lens checklist panel",
           "simulation_prediction": "SIMULATED_SUCCESS",
           "actual_runner_status": "PASS",
           "comparison": "MATCH_TASK_EXECUTED",
@@ -193,23 +266,41 @@
     },
     "tpu_virtual": {
       "simulator_profile": {
-        "schema_version": "miilab.simulation.v1",
+        "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:03:39.644034+00:00",
+        "generated_at": "2026-10-27T23:14:40.614445+00:00",
         "profile": "tpu_virtual",
         "device_class": "TPU",
         "physical_hardware_provisioned": false,
         "logical_slots": 32,
         "logical_storage_units": 20000,
         "job_count": 12,
+        "sampled_jobs": 12,
+        "sampling_reduction_factor": 1.0,
+        "requested_mode": "exact",
+        "execution_mode": "EXACT",
+        "work_units_estimated": false,
         "total_work_units": 10360,
         "synthetic_units_per_tick": 240,
+        "batch_count": 1,
         "simulated_ticks": 44,
+        "max_ticks": 100000,
         "status": "SIMULATED_COMPLETE",
+        "batch_detail_included": true,
+        "batches": [
+          {
+            "batch": 1,
+            "jobs": 12,
+            "work_units": 10360,
+            "simulated_ticks": 44
+          }
+        ],
         "limitations": [
           "Not a hardware benchmark",
           "Not real wall-clock timing",
-          "No real storage or compute allocated"
+          "No real storage or compute allocated",
+          "Fast sampled mode estimates large workloads from a deterministic sample",
+          "Fictional unbounded capacity is only a model assumption"
         ]
       },
       "task_comparisons": [
@@ -232,6 +323,14 @@
         {
           "task_id": "python_source_compile",
           "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "persona_panel_generation",
+          "description": "Generate the public-work-inspired reasoning lens checklist panel",
           "simulation_prediction": "SIMULATED_SUCCESS",
           "actual_runner_status": "PASS",
           "comparison": "MATCH_TASK_EXECUTED",
@@ -257,23 +356,41 @@
     },
     "server_virtual": {
       "simulator_profile": {
-        "schema_version": "miilab.simulation.v1",
+        "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:03:39.644057+00:00",
+        "generated_at": "2026-10-27T23:14:40.614461+00:00",
         "profile": "server_virtual",
         "device_class": "SERVER",
         "physical_hardware_provisioned": false,
         "logical_slots": 64,
         "logical_storage_units": 100000,
         "job_count": 12,
+        "sampled_jobs": 12,
+        "sampling_reduction_factor": 1.0,
+        "requested_mode": "exact",
+        "execution_mode": "EXACT",
+        "work_units_estimated": false,
         "total_work_units": 10360,
         "synthetic_units_per_tick": 500,
+        "batch_count": 1,
         "simulated_ticks": 21,
+        "max_ticks": 100000,
         "status": "SIMULATED_COMPLETE",
+        "batch_detail_included": true,
+        "batches": [
+          {
+            "batch": 1,
+            "jobs": 12,
+            "work_units": 10360,
+            "simulated_ticks": 21
+          }
+        ],
         "limitations": [
           "Not a hardware benchmark",
           "Not real wall-clock timing",
-          "No real storage or compute allocated"
+          "No real storage or compute allocated",
+          "Fast sampled mode estimates large workloads from a deterministic sample",
+          "Fictional unbounded capacity is only a model assumption"
         ]
       },
       "task_comparisons": [
@@ -296,6 +413,14 @@
         {
           "task_id": "python_source_compile",
           "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "persona_panel_generation",
+          "description": "Generate the public-work-inspired reasoning lens checklist panel",
           "simulation_prediction": "SIMULATED_SUCCESS",
           "actual_runner_status": "PASS",
           "comparison": "MATCH_TASK_EXECUTED",
@@ -321,23 +446,41 @@
     },
     "infinity_space_server": {
       "simulator_profile": {
-        "schema_version": "miilab.simulation.v1",
+        "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-27T23:03:39.644084+00:00",
+        "generated_at": "2026-10-27T23:14:40.614478+00:00",
         "profile": "infinity_space_server",
         "device_class": "FICTIONAL_ELASTIC_SIMULATOR",
         "physical_hardware_provisioned": false,
         "logical_slots": "unbounded-in-simulator",
         "logical_storage_units": "unbounded-in-simulator",
         "job_count": 12,
+        "sampled_jobs": 12,
+        "sampling_reduction_factor": 1.0,
+        "requested_mode": "exact",
+        "execution_mode": "EXACT",
+        "work_units_estimated": false,
         "total_work_units": 10360,
         "synthetic_units_per_tick": 1000,
+        "batch_count": 1,
         "simulated_ticks": 11,
+        "max_ticks": 100000,
         "status": "SIMULATED_COMPLETE",
+        "batch_detail_included": true,
+        "batches": [
+          {
+            "batch": 1,
+            "jobs": 12,
+            "work_units": 10360,
+            "simulated_ticks": 11
+          }
+        ],
         "limitations": [
           "Not a hardware benchmark",
           "Not real wall-clock timing",
-          "No real storage or compute allocated"
+          "No real storage or compute allocated",
+          "Fast sampled mode estimates large workloads from a deterministic sample",
+          "Fictional unbounded capacity is only a model assumption"
         ]
       },
       "task_comparisons": [
@@ -360,6 +503,14 @@
         {
           "task_id": "python_source_compile",
           "description": "Compile repository Python sources",
+          "simulation_prediction": "SIMULATED_SUCCESS",
+          "actual_runner_status": "PASS",
+          "comparison": "MATCH_TASK_EXECUTED",
+          "real_execution_attempted": true
+        },
+        {
+          "task_id": "persona_panel_generation",
+          "description": "Generate the public-work-inspired reasoning lens checklist panel",
           "simulation_prediction": "SIMULATED_SUCCESS",
           "actual_runner_status": "PASS",
           "comparison": "MATCH_TASK_EXECUTED",
@@ -386,9 +537,9 @@
   },
   "summary": {
     "profile_count": 5,
-    "comparison_rows": 25,
-    "real_execution_attempts_counted_per_profile": 20,
-    "matching_comparisons": 15,
+    "comparison_rows": 30,
+    "real_execution_attempts_counted_per_profile": 25,
+    "matching_comparisons": 20,
     "simulation_reality_gaps_or_failures": 4,
     "not_comparable_because_not_run": 5,
     "large_model_training_claimed": false
