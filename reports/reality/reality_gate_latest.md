@@ -1,6 +1,6 @@
 # Simulation-to-Reality Gate
 
-- Generated UTC: 2026-10-28T14:14:46.062881+00:00
+- Generated UTC: 2026-10-28T15:11:12.970946+00:00
 - Evidence class: MIXED_SIMULATION_AND_REAL_RUNNER_EXECUTION
 - Profiles compared: 5
 - Comparison rows: 35
