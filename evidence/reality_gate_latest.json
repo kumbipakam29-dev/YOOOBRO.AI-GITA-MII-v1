@@ -1,6 +1,6 @@
 {
   "schema_version": "miilab.reality-gate.v1",
-  "generated_at": "2026-10-30T03:03:21.024486+00:00",
+  "generated_at": "2026-10-30T04:03:20.632833+00:00",
   "evidence_class": "MIXED_SIMULATION_AND_REAL_RUNNER_EXECUTION",
   "execution_environment": {
     "provider": "GitHub Actions runner when run in CI",
@@ -32,7 +32,7 @@
         "viveka"
       ],
       "dataset_sha256": "e9bc910c3eaad4ecd7fb3edc1e65e67c2a5b6295065c81f46144d41b0d6546a6",
-      "duration_seconds": 0.000191
+      "duration_seconds": 0.0002
     },
     "tiny_classifier_training": {
       "status": "PASS",
@@ -43,12 +43,12 @@
       "training_accuracy_warning": "Training-set metric only; not held-out generalization.",
       "artifact_round_trip": true,
       "temporary_artifact_sha256": "f8f9811d5d44f181ce789d54a6833bc23d09525ca8940f7224a2fd5b74189c05",
-      "duration_seconds": 0.003243
+      "duration_seconds": 0.003277
     },
     "python_source_compile": {
       "status": "PASS",
       "files_compiled": 13,
-      "duration_seconds": 0.013204
+      "duration_seconds": 0.013171
     },
     "persona_panel_generation": {
       "status": "PASS",
@@ -57,7 +57,7 @@
       "review_count": 64,
       "iq_claimed": false,
       "solutions_claimed": false,
-      "duration_seconds": 0.000339
+      "duration_seconds": 0.000318
     },
     "persona_panel_stress_10m": {
       "schema_version": "miilab.persona-panel-stress.v1",
@@ -72,7 +72,7 @@
       "virtual_review_cell_equivalents": 640000000,
       "review_cells_individually_materialized": 0,
       "execution_mode": "REUSED_TEMPLATE_AGGREGATE_SIMULATION",
-      "loop_duration_seconds": 0.342094,
+      "loop_duration_seconds": 0.287402,
       "coverage_check": "PASS",
       "actual_people_recreated": false,
       "iq_claimed": false,
@@ -87,7 +87,7 @@
         "Frontier tasks still require task-specific solvers and independent verifiers."
       ],
       "status": "PASS",
-      "duration_seconds": 0.342372
+      "duration_seconds": 0.287693
     },
     "accelerator_probe": {
       "status": "NOT_DETECTED",
@@ -106,7 +106,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-30T03:03:21.024288+00:00",
+        "generated_at": "2026-10-30T04:03:20.632627+00:00",
         "profile": "cpu_virtual",
         "device_class": "CPU",
         "physical_hardware_provisioned": false,
@@ -216,7 +216,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-30T03:03:21.024328+00:00",
+        "generated_at": "2026-10-30T04:03:20.632668+00:00",
         "profile": "gpu_virtual",
         "device_class": "GPU",
         "physical_hardware_provisioned": false,
@@ -314,7 +314,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-30T03:03:21.024352+00:00",
+        "generated_at": "2026-10-30T04:03:20.632694+00:00",
         "profile": "tpu_virtual",
         "device_class": "TPU",
         "physical_hardware_provisioned": false,
@@ -412,7 +412,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-30T03:03:21.024374+00:00",
+        "generated_at": "2026-10-30T04:03:20.632716+00:00",
         "profile": "server_virtual",
         "device_class": "SERVER",
         "physical_hardware_provisioned": false,
@@ -510,7 +510,7 @@
       "simulator_profile": {
         "schema_version": "miilab.simulation.v2",
         "evidence_class": "SIMULATION",
-        "generated_at": "2026-10-30T03:03:21.024397+00:00",
+        "generated_at": "2026-10-30T04:03:20.632740+00:00",
         "profile": "infinity_space_server",
         "device_class": "FICTIONAL_ELASTIC_SIMULATOR",
         "physical_hardware_provisioned": false,
