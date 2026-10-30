@@ -1,9 +1,9 @@
 {
   "schema_version": "miilab.hourly-report.v2",
-  "generated_at": "2026-10-30T20:55:56.517843+00:00",
+  "generated_at": "2026-10-30T21:53:04.842925+00:00",
   "repository": "kumbipakam29-dev/YOOOBRO.AI-GITA-MII-v1",
-  "commit_sha": "bb2364c5be988075c88428e545d6a574b8355156",
-  "workflow_run_id": "41127074383",
+  "commit_sha": "e7135e9f8a768d4066c056433b713a3c76d3147b",
+  "workflow_run_id": "41134255804",
   "report_type": "BEST_EFFORT_HOURLY_STATUS_AND_REALITY_GATE",
   "test_step_outcome": "success",
   "reality_gate_step_outcome": "success",
