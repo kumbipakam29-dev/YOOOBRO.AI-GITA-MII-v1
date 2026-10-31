@@ -1,6 +1,6 @@
 # MIi Bounded Evolution Loop
 
-- Generated UTC: 2026-10-31T16:16:16.924336+00:00
+- Generated UTC: 2026-10-31T17:14:53.015977+00:00
 - Cycles: 7/7
 - Hard-task definitions: 38
 - PASS / FAIL / TIMEOUT / ERROR: 7 / 0 / 0 / 0
@@ -9,12 +9,12 @@
 
 | Cycle | Check | Status | Seconds | Exit |
 |---:|---|---|---:|---:|
-| 1 | dataset_integrity | PASS | 0.021414 | 0 |
-| 2 | hard_task_catalog_integrity | PASS | 0.021054 | 0 |
-| 3 | source_compile | PASS | 0.022609 | 0 |
-| 4 | tiny_cpu_training | PASS | 0.030565 | 0 |
-| 5 | virtual_compute_smoke | PASS | 0.024216 | 0 |
-| 6 | persona_panel_integrity | PASS | 0.024408 | 0 |
-| 7 | psychology_task_schema | PASS | 0.015678 | 0 |
+| 1 | dataset_integrity | PASS | 0.026008 | 0 |
+| 2 | hard_task_catalog_integrity | PASS | 0.02654 | 0 |
+| 3 | source_compile | PASS | 0.02943 | 0 |
+| 4 | tiny_cpu_training | PASS | 0.038002 | 0 |
+| 5 | virtual_compute_smoke | PASS | 0.030923 | 0 |
+| 6 | persona_panel_integrity | PASS | 0.031911 | 0 |
+| 7 | psychology_task_schema | PASS | 0.019471 | 0 |
 
 This report validates only these bounded runner checks. The hard-task catalog remains planned until task-specific verifiers and independent reviews pass.
