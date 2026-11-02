@@ -45,7 +45,7 @@ jobs:
             models = doc.fetch("candidates")
             raise "expected 16 candidates, got #{models.length}" unless models.length == 16
             models.each do |model|
-              raise "missing exact 40-char revision: #{model["key"]}" unless model["revision"].match?(/\\A[0-9a-f]{40}\\z/)
+              raise "missing exact 40-char revision: #{model["key"]}" unless model["revision"].is_a?(String) && model["revision"].length == 40 && model["revision"].chars.all? { |c| ("0".."9").include?(c) || ("a".."f").include?(c) }
               raise "not discovered: #{model["key"]}" unless model["discovery_state"] == "DISCOVERED"
               raise "metadata not verified: #{model["key"]}" unless model["metadata_state"].to_s.start_with?("VERIFIED")
               raise "configured prematurely: #{model["key"]}" unless model["configuration_state"] == "NOT_CONFIGURED"
