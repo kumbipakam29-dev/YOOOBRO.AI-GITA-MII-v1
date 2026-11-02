@@ -37,6 +37,23 @@ jobs:
           assert rows and all(r.get('text') and r.get('label') for r in rows)
           print(f'Validated {len(rows)} examples.')
           PY
+      - name: Validate pinned model registry and lifecycle states
+        run: |
+          ruby -ryaml -e '
+            doc = YAML.load_file("registry/frontier_models.yaml")
+            raise "wrong registry schema" unless doc["schema_version"] == "miilab.model-registry.v2"
+            models = doc.fetch("candidates")
+            raise "expected 16 candidates, got #{models.length}" unless models.length == 16
+            models.each do |model|
+              raise "missing exact 40-char revision: #{model["key"]}" unless model["revision"].match?(/\\A[0-9a-f]{40}\\z/)
+              raise "not discovered: #{model["key"]}" unless model["discovery_state"] == "DISCOVERED"
+              raise "metadata not verified: #{model["key"]}" unless model["metadata_state"].to_s.start_with?("VERIFIED")
+              raise "configured prematurely: #{model["key"]}" unless model["configuration_state"] == "NOT_CONFIGURED"
+              raise "tested prematurely: #{model["key"]}" unless model["execution_state"] == "NOT_TESTED"
+              raise "activated prematurely: #{model["key"]}" unless model["activation_state"] == "INACTIVE"
+            end
+            puts "Validated #{models.length} pinned, metadata-verified, discovery-only model records."
+          '
       - name: Smoke-run CPU baseline and simulation
         env:
           PYTHONPATH: src
