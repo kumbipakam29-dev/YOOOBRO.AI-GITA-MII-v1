@@ -1,24 +1,299 @@
-schema_version: miilab.model-registry.v1
-policy: Candidates are metadata records only; they are not automatically downloaded, run, or trained.
+schema_version: miilab.model-registry.v2
+as_of: "2026-11-02"
+policy: "Discovery and metadata verification never imply download, configuration, testing, training, or activation."
+state_legend:
+  discovered: "Found in an upstream release/model registry."
+  metadata_verified: "Official model card, current upstream revision, license metadata and core specs checked."
+  configured: "Runtime/provider adapter and exact revision configured in YOOOBRO."
+  tested: "Executed on a named runtime and hardware with reproducible logs."
+  active: "Approved for a production route after privacy, license, safety and reliability gates."
+global_defaults:
+  downloaded: false
+  configured: false
+  tested: false
+  active: false
+  trained_by_mii: false
 candidates:
-  - id: deepseek-v4-1-flash-1017
-    display_name: DeepSeek V4.1 Flash 1017
-    state: DISCOVERED
-    verification: PENDING
-    license_review: REQUIRED
-    local_execution: NOT_TESTED
-    training_by_mii: false
-  - id: qwen3-8-27b
-    display_name: Qwen3.8-27B
-    state: DISCOVERED
-    verification: PENDING
-    license_review: REQUIRED
-    local_execution: NOT_TESTED
-    training_by_mii: false
-  - id: glm-5-3-flash
-    display_name: GLM-5.3-Flash
-    state: DISCOVERED
-    verification: PENDING
-    license_review: REQUIRED
-    local_execution: NOT_TESTED
-    training_by_mii: false
+  - key: gemma-4-e4b-it
+    region: global
+    model_id: "google/gemma-4-E4B-it"
+    revision: "ee0ef6023621cff504d758262d4e04895a5af4a2"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Apache-2.0"
+    commercial_use: "Permissive Apache-2.0; preserve notices."
+    input_modalities: [text, image, audio, video]
+    output_modalities: [text]
+    context_tokens: 131072
+    quantization: ["BF16 17.9GB", "SFP8 8.9GB", "Q4_0 4.5GB", "official LiteRT-LM mobile profile about 2.5GB (text-only about 2.2GB)"]
+    hardware_notes: "Best mobile/edge candidate; KV cache and runtime memory are additional. Audio is input, not speech generation."
+    role_fit: [android_offline_fallback, multimodal_perception, multilingual_assistant]
+    language_note: "Gemma 4 is trained on 140+ languages and supports 35+ out of the box; Hindi/Gujarati must still pass YOOOBRO's own test set."
+    source: "https://huggingface.co/google/gemma-4-E4B-it/tree/ee0ef6023621cff504d758262d4e04895a5af4a2"
+  - key: gemma-4-26b-a4b-it
+    region: global
+    model_id: "google/gemma-4-26B-A4B-it"
+    revision: "4d7ae4984b7db7de8f8457170b3f1a419ee76d52"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Apache-2.0"
+    commercial_use: "Permissive Apache-2.0; preserve notices."
+    input_modalities: [text, image, video]
+    output_modalities: [text]
+    context_tokens: 262144
+    quantization: ["BF16 57.7GB", "SFP8 28.8GB", "Q4_0 14.4GB"]
+    hardware_notes: "Q4 weights alone are about 14.4GB; reserve additional memory for runtime and KV cache."
+    role_fit: [general_reasoning, agent_router, vision_reasoning]
+    hosted_free_route: "google/gemma-4-26b-a4b-it:free (OpenRouter; rate-limited shared endpoint)"
+    source: "https://huggingface.co/google/gemma-4-26B-A4B-it/tree/4d7ae4984b7db7de8f8457170b3f1a419ee76d52"
+  - key: nemotron-35-content-safety
+    region: global
+    model_id: "nvidia/Nemotron-3.5-Content-Safety"
+    revision: "35645ed3543b7e7ffaed2e788699e57a5051497c"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "OpenMDW-1.1 plus Gemma Terms and Gemma Prohibited Use Policy"
+    commercial_use: "Commercial deployment is possible subject to all bundled license and policy terms."
+    input_modalities: [text, image]
+    output_modalities: [text_classification]
+    context_tokens: 131072
+    quantization: ["BF16 4B parameters; repository about 8.64GB", "third-party GGUF Q4_K_M about 2.49GB"]
+    hardware_notes: "NVIDIA lists A100 80GB, H100 80GB and RTX PRO 6000 BSE for its reference evaluation; third-party GGUF has smaller footprints."
+    role_fit: [input_moderation, response_moderation, kids_safe_guardrail, policy_classifier]
+    language_note: "12 listed languages include Hindi; Gujarati is not listed. Never use as the only safety control."
+    hosted_free_route: "OpenRouter free variant listed; shared endpoint terms and rate limits apply."
+    source: "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety/tree/35645ed3543b7e7ffaed2e788699e57a5051497c"
+  - key: nemotron-35-bolt-e4b-4gb
+    region: global
+    model_id: "nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB"
+    revision: "1db54d5b12533ff1bcaa8e42cf4c667988a1f1be"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "OpenMDW-1.1"
+    commercial_use: "Commercial use allowed subject to OpenMDW-1.1 and model policy."
+    input_modalities: [text]
+    output_modalities: [text, tool_calls]
+    context_tokens: 65536
+    quantization: ["NVIDIA Q4_K_M GGUF; repository file about 6.18GB"]
+    hardware_notes: "Local llama.cpp/Ollama path is documented; Android runtime, latency and thermals are not verified."
+    role_fit: [small_persona_model, local_tool_agent, edge_assistant]
+    language_note: "Model card emphasizes English, Spanish, French, German, Italian, Japanese and Chinese; Hindi/Gujarati are unverified."
+    source: "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB/tree/1db54d5b12533ff1bcaa8e42cf4c667988a1f1be"
+  - key: nemotron-35-super-vl-nvfp4
+    region: global
+    model_id: "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-NVFP4"
+    revision: "da5b2650a835292c678994a1fa3fb653250fb508"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "OpenMDW-1.1"
+    commercial_use: "Commercial use subject to OpenMDW-1.1 and usage policies."
+    input_modalities: [text, image, documents, gui_screenshots, video]
+    output_modalities: [text, tool_calls]
+    context_tokens: 1000000
+    quantization: ["Official NVFP4 checkpoint", "BF16 companion checkpoint"]
+    hardware_notes: "BF16 reference deployment uses 4x H100 or 2x GB200; NVFP4 is aimed at high-memory Blackwell/H200-class systems. Not a free GitHub runner workload."
+    role_fit: [vision_agent, gui_agent, document_agent, video_understanding, long_context_research]
+    hosted_free_route: "nvidia/nemotron-3.5-super-vl:free (OpenRouter; 20 RPM/50 RPD class limits)"
+    privacy_note: "The free NVIDIA endpoint explicitly prohibits confidential information and personal data such as faces or voices; use public/synthetic media only."
+    source: "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-NVFP4/tree/da5b2650a835292c678994a1fa3fb653250fb508"
+  - key: north-mini-code-10
+    region: global
+    model_id: "CohereLabs/North-Mini-Code-1.0"
+    revision: "d11e61a842617a22dc328552fa5bb86231ee4f37"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Apache-2.0"
+    commercial_use: "Permissive Apache-2.0; hosted API terms remain separate."
+    input_modalities: [text]
+    output_modalities: [text, tool_calls]
+    context_tokens: 256000
+    quantization: ["BF16 checkpoint; repository about 61GB", "third-party quantizations available"]
+    hardware_notes: "Official card uses tensor parallel size 2 for its reference serving command; quantized community variants may reduce memory."
+    role_fit: [github_coding_agent, bug_fix_agent, test_writer, terminal_agent]
+    hosted_free_route: "cohere/north-mini-code:free (OpenRouter; 256K context, tool calls, rate-limited)"
+    source: "https://huggingface.co/CohereLabs/North-Mini-Code-1.0/tree/d11e61a842617a22dc328552fa5bb86231ee4f37"
+  - key: xing4-29b-a4b
+    region: china
+    model_id: "XingChen-AGI/Xing4.0-29B-A4B"
+    revision: "a32a2e99b5877c6b7ad16e9954ec08488bcc5fa2"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Apache-2.0"
+    commercial_use: "Permissive Apache-2.0; preserve notices."
+    input_modalities: [text]
+    output_modalities: [text, tool_calls]
+    context_tokens: 262144
+    quantization: ["BF16 repository about 62GB", "community Q4 GGUF about 11.6GB"]
+    hardware_notes: "Community Q4 footprint suggests a 16GB GPU class for short-context testing; long-context KV memory is additional."
+    role_fit: [coding_agent, engineering_agent, planning_agent]
+    hosted_free_route: "xingchen-agi/xing4.0-29b-a4b:free (OpenRouter; tool calls; current endpoint availability about 99.75% over 72h at scan time)"
+    source: "https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B/tree/a32a2e99b5877c6b7ad16e9954ec08488bcc5fa2"
+  - key: qwen38-27b
+    region: china
+    model_id: "Qwen/Qwen3.8-27B"
+    revision: "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Apache-2.0"
+    commercial_use: "Permissive Apache-2.0; preserve notices."
+    input_modalities: [text, image, video]
+    output_modalities: [text, tool_calls]
+    context_tokens: 262144
+    quantization: ["BF16 repository about 55.6GB", "community Q4/GGUF variants exist; exact quant revision must be pinned separately"]
+    hardware_notes: "BF16 needs roughly 56GB just for weights; Q4 weight-only estimate about 14GB before runtime/KV cache."
+    role_fit: [general_assistant, reasoning, multimodal_chat, multilingual_evaluation]
+    language_note: "Do not assume Hindi/Gujarati quality from the family name; run a per-language benchmark."
+    source: "https://huggingface.co/Qwen/Qwen3.8-27B/tree/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+  - key: qwen38-flash-next
+    region: china
+    model_id: "Qwen/Qwen3.8-Flash-Next"
+    revision: "de4b8e4d43b917e7706784d8bb445c9af86a3540"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Qwen Community License 1.0"
+    commercial_use: "Custom terms; obtain separate approval for covered MaaS/AI Work Assistant commercial use. Legal review required for a hosted YOOOBRO route."
+    input_modalities: [text, image, video]
+    output_modalities: [text, tool_calls]
+    context_tokens: 262144
+    extended_context_tokens: 1000000
+    quantization: ["Official BF16 checkpoint; repository about 360GB"]
+    hardware_notes: "Large multi-GPU deployment; active-parameter count does not remove the need to store all experts."
+    role_fit: [frontier_reasoning, long_context_agent, multimodal_research]
+    source: "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/tree/de4b8e4d43b917e7706784d8bb445c9af86a3540"
+  - key: deepseek-v41-flash-1017
+    region: china
+    model_id: "deepseek-ai/DeepSeek-V4.1-Flash-1017"
+    revision: "1bae0e1088993b9b82de08f59de5be5a34e42170"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "MIT"
+    commercial_use: "Permissive MIT; preserve notices."
+    input_modalities: [text, image]
+    output_modalities: [text, tool_calls]
+    context_tokens: 1000000
+    quantization: ["Official FP8 checkpoint; official reference inference uses FP4 experts"]
+    hardware_notes: "HF repository about 510GB; official reference uses an 8-way model-parallel setup. Multi-GPU/multi-node deployment, KV cache and networking required."
+    role_fit: [frontier_reasoning, hard_math, coding_agent, long_context_research]
+    source: "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/tree/1bae0e1088993b9b82de08f59de5be5a34e42170"
+  - key: glm53-flash
+    region: china
+    model_id: "zai-org/GLM-5.3-Flash"
+    revision: "46a050bec13002ad29ee795c16e61cf4fa3c4a9c"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "MIT"
+    commercial_use: "Permissive MIT; preserve notices."
+    input_modalities: [text, image, video]
+    output_modalities: [text, tool_calls]
+    context_tokens: 1000000
+    quantization: ["Official FP8 checkpoint; third-party NVFP4/MXFP4 variants exist"]
+    hardware_notes: "About 328GB repository footprint; multi-GPU serving required. Verify runtime compatibility against the pinned revision."
+    role_fit: [agent_orchestration, coding_agent, multimodal_long_context]
+    source: "https://huggingface.co/zai-org/GLM-5.3-Flash/tree/46a050bec13002ad29ee795c16e61cf4fa3c4a9c"
+  - key: minimax-m31-flash
+    region: china
+    model_id: "MiniMaxAI/MiniMax-M3.1-Flash"
+    revision: "2f33a8b9ae49ce7b51c994df97166a7fd059bc2e"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED_WITH_PARAMETER_COUNT_DISCREPANCY
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "MiniMax Community License"
+    commercial_use: "Custom terms: attribution and notice required for commercial use; above USD 20M annual revenue requires prior written authorization."
+    input_modalities: [text, image, video]
+    output_modalities: [text, tool_calls]
+    context_tokens: 1000000
+    quantization: ["Quantization-aware trained checkpoint; F8_E4M3/MXFP8 tensor formats listed"]
+    hardware_notes: "Repository about 252GB. Model card states 428B total/23B active while the HF sidebar parameter counter differs; resolve before capacity planning."
+    role_fit: [frontier_reasoning, agentic_coding, long_context]
+    source: "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash/tree/2f33a8b9ae49ce7b51c994df97166a7fd059bc2e"
+  - key: kimi-k3
+    region: china
+    model_id: "moonshotai/Kimi-K3"
+    revision: "f831ab66814297da540d832a5235f8e904f29d06"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Kimi K3 License"
+    commercial_use: "Embedded end-user product features are excluded from the MaaS definition; large-scale/MaaS thresholds and attribution obligations apply. Legal review required."
+    input_modalities: [text, image]
+    output_modalities: [text, tool_calls]
+    context_tokens: 1000000
+    quantization: ["Native MXFP4 weights; MXFP8 activations"]
+    hardware_notes: "Repository storage about 1.56TB; official deployment recipe targets 8x GB300/MI355X-class hardware. Video capability is described in the card but runtime path needs separate verification."
+    role_fit: [frontier_reasoning, long_context_agent, multimodal_research]
+    source: "https://huggingface.co/moonshotai/Kimi-K3/tree/f831ab66814297da540d832a5235f8e904f29d06"
+  - key: dots3-note-preview
+    region: global
+    model_id: "dots-studio/dots3-note-prev"
+    revision: "1e1e7b0cd37a3a48a6c8d7fa55d5f9d14377006b"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Apache-2.0"
+    commercial_use: "Permissive Apache-2.0; preserve notices."
+    input_modalities: [text, image, audio]
+    output_modalities: [text]
+    context_tokens: 512000
+    quantization: ["BF16 repository about 577GB; FP8 serving path documented"]
+    hardware_notes: "High-end multi-GPU deployment; free OpenRouter endpoint accepts text/image only and is scheduled to be retired Dec 31, 2026."
+    role_fit: [frontier_reasoning, multimodal_research, long_context]
+    hosted_free_route: "dots-studio/dots-3-note-preview:free; retirement announced for 2026-12-31."
+    source: "https://huggingface.co/dots-studio/dots3-note-prev/tree/1e1e7b0cd37a3a48a6c8d7fa55d5f9d14377006b"
+  - key: recursive-flint
+    region: global
+    model_id: "RecursiveSI/flint"
+    revision: "2a247be0c0aec895ccb0ac7ca92229ec6df37288"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "Apache-2.0"
+    commercial_use: "Permissive Apache-2.0; preserve notices."
+    input_modalities: [text]
+    output_modalities: [text, tool_calls]
+    context_tokens: 262144
+    quantization: ["BF16 repository about 79.6GB; 96 community quantizations"]
+    hardware_notes: "Official SGLang serving targets one B300 or H200 per replica. OpenRouter free route had only 3.32% availability over the last 72h at scan time."
+    role_fit: [github_coding_agent, bug_fix_agent, test_writer]
+    hosted_free_route: "recursive/flint-v1.0:free; not reliable at scan time."
+    source: "https://huggingface.co/RecursiveSI/flint/tree/2a247be0c0aec895ccb0ac7ca92229ec6df37288"
