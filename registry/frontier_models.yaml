@@ -297,3 +297,23 @@ candidates:
     role_fit: [github_coding_agent, bug_fix_agent, test_writer]
     hosted_free_route: "recursive/flint-v1.0:free; not reliable at scan time."
     source: "https://huggingface.co/RecursiveSI/flint/tree/2a247be0c0aec895ccb0ac7ca92229ec6df37288"
+  - key: nemotron-3-nano-omni-nvfp4
+    region: global
+    model_id: "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-NVFP4"
+    revision: "16993199e436da4ba75ddc410855f87e0d996ee6"
+    discovery_state: DISCOVERED
+    metadata_state: VERIFIED
+    configuration_state: NOT_CONFIGURED
+    execution_state: NOT_TESTED
+    activation_state: INACTIVE
+    license: "NVIDIA Open Model Agreement"
+    commercial_use: "NVIDIA states commercial use is allowed subject to the Open Model Agreement."
+    input_modalities: [text, image, audio, video]
+    output_modalities: [text, tool_calls]
+    context_tokens: 256000
+    quantization: ["Official NVFP4 checkpoint about 21GB", "BF16 about 62GB", "FP8 about 33GB"]
+    hardware_notes: "NVFP4 minimum listed as 1x RTX 5090 32GB; DGX Spark and Jetson Thor supported. Requires vLLM 0.20.0 for the documented route."
+    role_fit: [perception_subagent, video_understanding, audio_transcription, document_agent]
+    language_note: "Official card says English only; not suitable as YOOOBRO's Hindi/Hinglish/Gujarati user-facing model without a separate multilingual path."
+    hosted_free_route: "nvidia/nemotron-3-nano-omni:free (OpenRouter; provider and privacy terms must be checked)"
+    source: "https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-NVFP4/tree/16993199e436da4ba75ddc410855f87e0d996ee6"
