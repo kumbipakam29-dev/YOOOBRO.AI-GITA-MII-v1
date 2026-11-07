@@ -1,8 +1,8 @@
 # MIi Hourly Status Snapshot
 
-- Generated UTC: 2026-11-07T07:20:36.239609+00:00
+- Generated UTC: 2026-11-07T09:03:40.882135+00:00
 - Repository: kumbipakam29-dev/YOOOBRO.AI-GITA-MII-v1
-- Source commit: dde13feae5c702b2116b9d02a828aeaf063c00bb
+- Source commit: 836df9385f76851781e277d291f2d69b82359a9a
 - Regression tests: success
 - Simulation-to-reality gate: success
 - Comparison rows: 35
